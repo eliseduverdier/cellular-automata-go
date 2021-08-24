@@ -1,5 +1,6 @@
-package Renderers
+package renderer
 
+import "os"
 import "image"
 import "image/color"
 import "image/png"

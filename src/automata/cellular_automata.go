@@ -1,7 +1,8 @@
-package CellularAutomata
+package automata
 
 import "math/rand"
 import "strconv"
+// import "RuleGenerator"
 
 type CellularAutomata struct {
 	states int
@@ -67,7 +68,7 @@ func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][
 	// TODO get index as int
     index, _ := strconv.Atoi(strconv.FormatInt(int64(sumOfBaseCells), c.states))
 
-	ruleArray := ruleToArray(c.states, c.order, c.ruleNumber);
+	ruleArray := RuleToArray(c.states, c.order, c.ruleNumber);
 
     return int(ruleArray[index]);
 }

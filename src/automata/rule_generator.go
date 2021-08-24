@@ -1,4 +1,4 @@
-package CellularAutomata
+package automata
 
 import "math"
 import "strconv"
@@ -9,7 +9,7 @@ import "strconv"
 // For example, for the rule 30 (11110 in base 2), the array map these values :
 // current pattern          : 111 (7)  110 (6)  101 (5)  100 (4)  011 (3)  010 (2)  001 (1)  000 (0)
 // new state for center cell:   0        0        0        1        1        1        1        0
-func ruleToArray(states int, order int, ruleNumber int) []int {
+func RuleToArray(states int, order int, ruleNumber int) []int {
 	// o cells with n possible states: n^o + 1
 	maxStates := int(math.Pow(float64(states), float64(order + 2)))
 
