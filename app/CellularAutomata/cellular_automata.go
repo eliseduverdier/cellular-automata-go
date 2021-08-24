@@ -25,11 +25,11 @@ func (c CellularAutomata) getFirstLine() []int {
             cells[i] = 0
         }
         // Fill intermediates colors like this [0001234321000]
-        for i := 0 ; i < c.states ; i++{
-            offset := i - 1;
+        for i := 0 ; i < c.states ; i++ {
+            offset := i - 1
             middle := c.columns / 2
-            cells[middle + offset] = i;
-            cells[middle - offset] = i;
+            cells[middle + offset] = i
+            cells[middle - offset] = i
         }
     }
 
@@ -40,8 +40,8 @@ func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int) []in
 	newLine := make([]int, c.columns)
 
 	for i := 0; i < c.columns; i++ {
-		newcellvalue := c.newCell(i, currentLineIndex, matrix);
-		newLine = append(newLine, newcellvalue);
+		newCellValue := c.newCell(i, currentLineIndex, matrix)
+		newLine[i] = newCellValue
 	}
 
 	return newLine
@@ -64,9 +64,10 @@ func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][
         sumOfBaseCells += matrix[currentLineIndex - 1][position] * 1000
     }
 
-    index := strconv.FormatInt(sumOfBaseCells, c.states)
+	// TODO get index as int
+    index, _ := strconv.Atoi(strconv.FormatInt(int64(sumOfBaseCells), c.states))
 
-	ruleArray := ruleToArray(c.ruleNumber);
+	ruleArray := ruleToArray(c.states, c.order, c.ruleNumber);
 
     return int(ruleArray[index]);
 }
