@@ -1,6 +1,6 @@
 package automata
 
-// import "fmt"
+import "fmt"
 import "math/rand"
 import "strconv"
 
@@ -14,12 +14,16 @@ type CellularAutomata struct {
 }
 
 func (c CellularAutomata) GetMatrix() [][]int {
-	matrix := make([][]int, c.Columns)
+	matrix := make([][]int, c.Rows)
 	matrix[0] = c.getFirstLine()
 	for i:= 1 ; i < c.Rows ; i++ {
 		matrix[i] = c.getNextLine(matrix, i-1)
 	}
 	return matrix
+}
+
+func (c CellularAutomata) GetImageName() string {
+	return fmt.Sprintf("s%d-o%d-r%d", c.States, c.Order, c.RuleNumber)
 }
 
 func (c CellularAutomata) getFirstLine() []int {
