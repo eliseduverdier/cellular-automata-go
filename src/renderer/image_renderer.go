@@ -9,8 +9,8 @@ import (
 
 func GenerateImage(matrix [][]int, imageName string) {
 
-	width := len(matrix[0])
-	height := len(matrix)
+	width := len(matrix)
+	height := len(matrix[0])
 
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{width, height}
@@ -34,7 +34,7 @@ func GenerateImage(matrix [][]int, imageName string) {
 	// Set color for each pixel.
 	for x := 0; x < width; x++ {
 		for y := 0; y < height; y++ {
-			img.Set(y, x, colors[matrix[x][y]])
+			img.Set(x, y, colors[matrix[x][y]])
 		}
 	}
 

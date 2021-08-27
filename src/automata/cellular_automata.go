@@ -16,8 +16,9 @@ type CellularAutomata struct {
 func (c CellularAutomata) GetMatrix() [][]int {
 	matrix := make([][]int, c.Rows)
 	matrix[0] = c.getFirstLine()
-	for i:= 1 ; i < c.Rows ; i++ {
-		matrix[i] = c.getNextLine(matrix, i-1)
+	//for i:= range matrix {
+	for i := 0; i<c.Rows-1 ; i++ {
+		matrix[i+1] = c.getNextLine(matrix, i)
 	}
 	return matrix
 }
@@ -52,6 +53,7 @@ func (c CellularAutomata) getFirstLine() []int {
 func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int) []int {
     newLine := make([]int, c.Columns)
 
+	// fmt.Println("---")
     for i := 0; i < c.Columns; i++ {
         newCellValue := c.newCell(i, currentLineIndex, matrix)
         newLine[i] = newCellValue
@@ -62,6 +64,7 @@ func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int) []in
 
 func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][]int) int {
 
+	// fmt.Println(fmt.Sprintf("pos: %d, line: %d", position, currentLineIndex))
     sumOfBaseCells := matrix[currentLineIndex][position] * 10
 
     // handle diagonals cells on the sides: loop to the other side
@@ -73,7 +76,7 @@ func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][
         sumOfBaseCells += matrix[currentLineIndex][position - 1] * 100 + matrix[currentLineIndex][position + 1]
     }
 
-    if c.Order == 2 && currentLineIndex > 1 { // 2nd order: also add center cell from n-2 line
+    if c.Order > 1 && currentLineIndex > 1 { // 2nd order: also add center cell from n-2 line
         sumOfBaseCells += matrix[currentLineIndex - 1][position] * 1000
     }
 

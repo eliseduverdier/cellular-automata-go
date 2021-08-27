@@ -15,6 +15,8 @@ func main() {
 	rule := flag.Int("r", 73, "the rule number")
 	randomStart := flag.Bool("random", true, "if the first line is random")
 
+	render := flag.String("render", "image", "image|text")
+
 	flag.Parse()
 
     automata := automata.CellularAutomata{
@@ -26,6 +28,10 @@ func main() {
         RuleNumber: *rule,
     }
 
-    // renderer.GenerateImage(automata.GetMatrix(), automata.GetImageName())
-    renderer.GenerateText(automata.GetMatrix())
+	switch *render {
+	case "image":
+		renderer.GenerateImage(automata.GetMatrix(), automata.GetImageName())
+	case "text":
+		renderer.GenerateText(automata.GetMatrix())
+	}
 }
