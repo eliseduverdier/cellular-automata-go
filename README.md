@@ -4,23 +4,40 @@ Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementar
 
 <img src="images/s2-o1-r73.png">
 
+**You can see more documentation about Automata and their implementation [here](https://eliseduverdier.github.io/cellular-automata-go/).**
+
 ## Use locally
 
-- `go build main.go` will compile the program (and make it easier to access shelll arguments)
-- `./main.go -s=2 -o=1 -r=123 -w=10 -h=20` create an in `images/s2-o1-r123.png`,
-
-## Run tests
-
+```shell
+go run main.go
 ```
-go test tests/*
+
+This will generate an image in `images/`
+
+### command line options
+
+Example: `go run main.go -s=5 -o=2 -r=12345 -w=30 -h=10 -render=text` will render the automata #12345 of 2nd order with 5 sates, in text directly to the console, showing 30 columns of characters, and 10 rows.
+| option | role |
+|---|---|
+| s | number of states |
+| o | order (1 or 2) |
+| r | rule number |
+| w | width in pixels |
+| h | height in pixels |
+| render | 'image' or 'text' |
+
+## Run test
+
+```shell
+go test tests/*_test.go
 ```
 
 ## Etc / Help
 
 ### Todo
-
-- [] add web server
-- [] add docker
+- [ ] add style checker
+- [ ] add web server
+- [ ] add docker
 
 ### install latest go version on ubuntu
 
