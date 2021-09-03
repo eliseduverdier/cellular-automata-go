@@ -3,14 +3,12 @@ name: Go
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'app'
-      - 'tests'
+    paths-ignore:
+      - 'docs/'
   pull_request:
     branches: [ main ]
-    paths:
-      - 'app'
-      - 'tests'
+    paths-ignore:
+      - 'docs/'
 
 jobs:
 

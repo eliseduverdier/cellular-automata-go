@@ -4,7 +4,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/eliseduverdier/cellular-automata-go?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/eliseduverdier/cellular-automata-go?style=flat-square)
 
-![Tests status](https://github.com/eliseduverdier/cellular-automata-go/actions/workflows/main.yml/badge.svg)
+![Tests status](https://github.com/eliseduverdier/cellular-automata-go/actions/workflows/quality.yml/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/eliseduverdier/cellular-automata-go)](https://goreportcard.com/report/github.com/eliseduverdier/cellular-automata-go)
 
 Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) images, with 2 to 9 states, or 1st and 2nd order, with customizable size, colors, and points distribution, using Go
