@@ -3,8 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/eliseduverdier/cellular-automata-go/src/automata"
-	"github.com/eliseduverdier/cellular-automata-go/src/renderer"
+	"github.com/eliseduverdier/cellular-automata-go/app"
 )
 
 func main() {
@@ -19,19 +18,13 @@ func main() {
 
 	flag.Parse()
 
-	automata := automata.CellularAutomata{
-		States:         *states,
-		Order:          *order,
-		Columns:        *columns,
-		Rows:           *rows,
-		HasRandomStart: *randomStart,
-		RuleNumber:     *rule,
-	}
-
-	switch *render {
-	case "image":
-		renderer.GenerateImage(automata.GetMatrix(), automata.GetImageName())
-	case "text":
-		renderer.GenerateText(automata.GetMatrix())
-	}
+	app.Render(
+		*states,
+		*order,
+		*columns,
+		*rows,
+		*randomStart,
+		*rule,
+		*render,
+	)
 }

@@ -1,6 +1,7 @@
 package renderer
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
@@ -8,7 +9,7 @@ import (
 )
 
 // GenerateImage  saves a PNG from the cellular automata's matrix
-func GenerateImage(matrix [][]int, imageName string) {
+func GenerateImage(matrix [][]int, metadata map[string]int) {
 
 	width := len(matrix)
 	height := len(matrix[0])
@@ -39,7 +40,12 @@ func GenerateImage(matrix [][]int, imageName string) {
 		}
 	}
 
+	imageName := fmt.Sprintf("s%d-o%d-r%d", metadata["states"], metadata["order"], metadata["rule"])
+
 	// Encode as PNG.
 	f, _ := os.Create("images/" + imageName + ".png")
-	png.Encode(f, img)
+	err := png.Encode(f, img)
+	if err != nil {
+		panic("Could not generate image")
+	}
 }

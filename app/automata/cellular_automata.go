@@ -1,7 +1,6 @@
 package automata
 
 import (
-	"fmt"
 	"math/rand"
 	"strconv"
 )
@@ -27,10 +26,13 @@ func (c CellularAutomata) GetMatrix() [][]int {
 	return matrix
 }
 
-// GetImageName  Returns the name trop the number of states, order, and rule number
-// TODO should not be mixed with this class !
-func (c CellularAutomata) GetImageName() string {
-	return fmt.Sprintf("s%d-o%d-r%d", c.States, c.Order, c.RuleNumber)
+// GetImageName  Returns the properties of the automata (states, order, and rule number)
+func (c CellularAutomata) GetMetadata() map[string]int {
+	return map[string]int{
+		"states": c.States,
+		"order":  c.Order,
+		"rule":   c.RuleNumber,
+	}
 }
 
 func (c CellularAutomata) getFirstLine() []int {

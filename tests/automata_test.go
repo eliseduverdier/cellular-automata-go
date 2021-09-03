@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/eliseduverdier/cellular-automata-go/src/automata"
+	"github.com/eliseduverdier/cellular-automata-go/app/automata"
 )
 
 func TestCellularAuto2states1order(t *testing.T) {
@@ -26,7 +26,7 @@ func TestCellularAuto2states1order(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Rule array is incorrect, got: %d, want: %d.", actual, expected)
+		t.Errorf("Rule array is incorrect, got: %v, want: %v.", actual, expected)
 	}
 }
 
@@ -40,7 +40,7 @@ func TestCellularAutoRectangle(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Rule array is incorrect, got: %d, want: %d.", actual, expected)
+		t.Errorf("Rule array is incorrect, got: %v, want: %v.", actual, expected)
 	}
 }
 
@@ -59,7 +59,7 @@ func TestCellularAuto3states2ndOrder(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Rule array is incorrect, got: %d, want: %d.", actual, expected)
+		t.Errorf("Rule array is incorrect, got: %v, want: %v.", actual, expected)
 	}
 }
 func TestCellularAutoRandom(t *testing.T) {
@@ -75,11 +75,15 @@ func TestCellularAutoRandom(t *testing.T) {
 }
 
 func TestCellularAutoImageName(t *testing.T) {
-	actual := automata.CellularAutomata{3, 2, 3, 3, false, 123}.GetImageName()
+	actual := automata.CellularAutomata{3, 2, 3, 3, false, 123}.GetMetadata()
 
-	expected := "s3-o2-r123"
+	expected := map[string]int{
+		"states": 3,
+		"order":  2,
+		"rule":   123,
+	}
 
-	if actual != expected {
-		t.Errorf("Expected filename to be %s, got: %s.", expected, actual)
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected metadata to be %v, got: %v.", expected, actual)
 	}
 }

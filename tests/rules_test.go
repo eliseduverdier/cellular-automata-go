@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/eliseduverdier/cellular-automata-go/src/automata"
+	"github.com/eliseduverdier/cellular-automata-go/app/automata"
 )
 
 func TestRule2states1order(t *testing.T) {
