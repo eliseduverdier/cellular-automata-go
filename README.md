@@ -1,5 +1,12 @@
 # cellular automata generator (in Go)
 
+![GitHub top language](https://img.shields.io/github/languages/top/eliseduverdier/cellular-automata-go?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/eliseduverdier/cellular-automata-go?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/eliseduverdier/cellular-automata-go?style=flat-square)
+
+![Tests status](https://github.com/eliseduverdier/cellular-automata-go/actions/workflows/main.yml/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/eliseduverdier/cellular-automata-go)](https://goreportcard.com/report/github.com/eliseduverdier/cellular-automata-go)
+
 Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) images, with 2 to 9 states, or 1st and 2nd order, with customizable size, colors, and points distribution, using Go
 
 <img src="images/s2-o1-r73.png">
@@ -35,6 +42,7 @@ go test tests/*_test.go
 ## Etc / Help
 
 ### Todo
+
 - [ ] add style checker
 - [ ] add web server
 - [ ] add docker
