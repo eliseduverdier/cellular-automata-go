@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-// CellularAutomata: The cellular automata structure
+// CellularAutomata  The cellular automata structure
 type CellularAutomata struct {
 	States         int
 	Order          int
@@ -16,7 +16,7 @@ type CellularAutomata struct {
 	RuleNumber     int
 }
 
-// GetMatrix: Builds the matrix line after line
+// GetMatrix  Builds the matrix line after line
 func (c CellularAutomata) GetMatrix() [][]int {
 	matrix := make([][]int, c.Rows)
 	matrix[0] = c.getFirstLine()
@@ -27,7 +27,7 @@ func (c CellularAutomata) GetMatrix() [][]int {
 	return matrix
 }
 
-// GetImageName: Returns the name trop the number of states, order, and rule number
+// GetImageName  Returns the name trop the number of states, order, and rule number
 // TODO should not be mixed with this class !
 func (c CellularAutomata) GetImageName() string {
 	return fmt.Sprintf("s%d-o%d-r%d", c.States, c.Order, c.RuleNumber)

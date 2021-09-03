@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-// GenerateImage: saves a PNG from the cellular automata's matrix
+// GenerateImage  saves a PNG from the cellular automata's matrix
 func GenerateImage(matrix [][]int, imageName string) {
 
 	width := len(matrix)

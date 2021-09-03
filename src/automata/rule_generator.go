@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// RuleToArray: Generates an associative array,
+// RuleToArray  Generates an associative array,
 // where N cells with S states generate a new cell
 // Basic cellular automata (2 states, 1st order), based on the 3 cells above.
 // For example, for the rule 30 (11110 in base 2), the array map these values :
@@ -30,7 +30,7 @@ func RuleToArray(states int, order int, ruleNumber int) []int {
 	return ruleArray
 }
 
-// Reverse: invert the number as string, to render as an array of int
+// Reverse  invert the number as string, to render as an array of int
 // 12110 -> [0, 1, 1, 2, 1]
 func Reverse(number string) []int {
 	//s := string(number)
