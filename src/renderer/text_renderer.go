@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// GenerateText: Prints the cellular automata to the console
 func GenerateText(matrix [][]int) {
 
 	colors := []string{

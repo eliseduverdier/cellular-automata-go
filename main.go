@@ -2,9 +2,9 @@ package main
 
 import (
 	"flag"
+
 	"github.com/eliseduverdier/cellular-automata-go/src/automata"
 	"github.com/eliseduverdier/cellular-automata-go/src/renderer"
-
 )
 
 func main() {
@@ -19,14 +19,14 @@ func main() {
 
 	flag.Parse()
 
-    automata := automata.CellularAutomata{
-        States: *states,
-        Order: *order,
-        Columns: *columns,
-        Rows: *rows,
-        HasRandomStart: *randomStart,
-        RuleNumber: *rule,
-    }
+	automata := automata.CellularAutomata{
+		States:         *states,
+		Order:          *order,
+		Columns:        *columns,
+		Rows:           *rows,
+		HasRandomStart: *randomStart,
+		RuleNumber:     *rule,
+	}
 
 	switch *render {
 	case "image":
