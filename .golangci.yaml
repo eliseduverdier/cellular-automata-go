@@ -1,0 +1,13 @@
+# Complete configuration reference: https://golangci-lint.run/usage/configuration/
+output:
+  format: colored-line-number # github-actions for later version
+
+linters-settings:
+  cyclop:
+    max-complexity: 5
+  gocyclo:
+    min-complexity: 5
+
+issues:
+  exclude:
+    - composite literal uses unkeyed fields
