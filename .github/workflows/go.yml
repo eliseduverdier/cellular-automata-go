@@ -8,10 +8,18 @@ on:
 
 jobs:
 
-  build:
-  
+  golangci:
+    name: 🔖 Linting the code 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: latest
+
+  test:
     name: ✔️ Testing the code
-    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,8 +29,5 @@ jobs:
       with:
         go-version: 1.13
 
-    - name: Build
-      run: go build -v main.go
-
-    - name: Test
+    - name: Run tests
       run: go test -v tests/*_test.go
