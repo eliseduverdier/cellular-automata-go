@@ -2,21 +2,22 @@ package app
 
 import (
 	"github.com/eliseduverdier/cellular-automata-go/app/automata"
+	"github.com/eliseduverdier/cellular-automata-go/app/parameters"
 	"github.com/eliseduverdier/cellular-automata-go/app/renderer"
 )
 
-func Render(states int, order int, columns int, rows int, randomStart bool, rule int, renderAs string) {
+func Render(params parameters.Parameters) {
 
 	automata := automata.CellularAutomata{
-		States:         states,
-		Order:          order,
-		Columns:        columns,
-		Rows:           rows,
-		HasRandomStart: randomStart,
-		RuleNumber:     rule,
+		States:         params.States,
+		Order:          params.Order,
+		Columns:        params.Columns,
+		Rows:           params.Rows,
+		HasRandomStart: params.RandomStart,
+		RuleNumber:     params.Rule,
 	}
 
-	switch renderAs {
+	switch params.Render {
 	case "image":
 		renderer.GenerateImage(automata.GetMatrix(), automata.GetMetadata())
 	case "text":
