@@ -3,13 +3,19 @@ name: Go
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'src'
+      - 'tests'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'src'
+      - 'tests'
 
 jobs:
 
   golangci:
-    name: 🔖 Linting the code 
+    name: 🔖 Linting the code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
