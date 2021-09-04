@@ -14,7 +14,10 @@ func renderImagePage(w http.ResponseWriter, req *http.Request) {
 	image := app.RenderImage(parameters.GetFromRequest(req))
 
 	w.Header().Set("Content-Type", "image/png")
-	png.Encode(w, image)
+	err := png.Encode(w, image)
+	if err != nil {
+		panic("Image couldn’t be encoded")
+	}
 }
 
 func renderTextPage(w http.ResponseWriter, req *http.Request) {
