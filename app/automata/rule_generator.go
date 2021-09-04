@@ -13,7 +13,7 @@ import (
 // new state for center cell:   0        0        0        1        1        1        1        0
 func RuleToArray(states int, order int, ruleNumber int) []int {
 	// o cells with n possible states: n^o + 1
-	maxStates := int(math.Pow(float64(states), float64(order+2)))
+	maxStates := GetMaxStates(states, order)
 
 	ruleInBaseN := strconv.FormatInt(int64(ruleNumber), states)
 	reversedRule := Reverse(ruleInBaseN)
@@ -41,4 +41,12 @@ func Reverse(number string) []int {
 	}
 
 	return result
+}
+
+func GetMaxStates(states int, order int) int {
+	return int(math.Pow(float64(states), float64(order+2)))
+}
+
+func GetMaxRule(states int) int {
+	return int(math.Pow(float64(2), float64(states)))
 }

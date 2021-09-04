@@ -5,7 +5,7 @@ import (
 )
 
 // GenerateText  Prints the cellular automata to the console
-func GenerateText(matrix [][]int) {
+func GenerateText(matrix [][]int, metadata map[string]int) string {
 
 	colors := []string{
 		"█",
@@ -20,10 +20,28 @@ func GenerateText(matrix [][]int) {
 		"❄",
 	}
 
+	string := GenerateTitle(metadata)
+	string += "\n"
+
 	for x := 0; x < len(matrix); x++ {
 		for y := 0; y < len(matrix[0]); y++ {
-			fmt.Print(colors[matrix[x][y]])
+			string += colors[matrix[x][y]]
 		}
-		fmt.Println("")
+		string += "\n"
 	}
+
+	return string
+}
+
+func GenerateTitle(metadata map[string]int) string {
+	return fmt.Sprintf(
+		`
+		 ╔═════════════════════════╗
+		 ║ States: %d  Order: %d     ║
+		 ║ Rule: %10d      ║
+		 ╚═════════════════════════╝`,
+		metadata["states"],
+		metadata["order"],
+		metadata["rule"],
+	)
 }

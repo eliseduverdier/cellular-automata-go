@@ -3,48 +3,49 @@ package main
 import (
 	"flag"
 	"fmt"
+	"image/png"
 	"net/http"
 
 	"github.com/eliseduverdier/cellular-automata-go/app"
 	"github.com/eliseduverdier/cellular-automata-go/app/parameters"
 )
 
-func hello(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "here automata \n")
+func renderImagePage(w http.ResponseWriter, req *http.Request) {
+	image := app.RenderImage(parameters.GetFromRequest(req))
+
+	w.Header().Set("Content-Type", "image/png")
+	png.Encode(w, image)
+}
+
+func renderTextPage(w http.ResponseWriter, req *http.Request) {
+	image := app.RenderText(parameters.GetFromRequest(req))
+
+	req.Header.Add("Application", "text/html")
+	fmt.Fprintf(w,
+		"<h1>Hello Cellular Automata</h1>"+
+			"<pre>%s</pre>",
+		image,
+	)
+}
+
+func renderShell() {
+	params := parameters.GetFromShell()
+	app.Render(params)
 }
 
 func main() {
-	params := getShellParameters()
+	// TODO doesn't work (:
+	displayInShell := flag.Bool("shell", false, "If present, create the image in images/, or display the textual automata directly in the shell")
 
-	app.Render(params)
-
-	// TODO getHttpGetParemeters()
-
-	http.HandleFunc("/hello", hello)
-	err := http.ListenAndServe(":8888", nil)
-	if err != nil {
-		panic("Server doesnt run")
-	}
-}
-
-func getShellParameters() parameters.Parameters {
-	states := flag.Int("s", 2, "the number of states")
-	order := flag.Int("o", 1, "the order (1 or 2)")
-	columns := flag.Int("w", 100, "the number of columns")
-	rows := flag.Int("h", 100, "the number of rows")
-	rule := flag.Int("r", 73, "the rule number")
-	randomStart := flag.Bool("random", true, "if the first line is random")
-	render := flag.String("render", "image", "image|text")
-
-	flag.Parse()
-
-	return parameters.Parameters{
-		States:      *states,
-		Order:       *order,
-		Columns:     *columns,
-		Rows:        *rows,
-		RandomStart: *randomStart,
-		Rule:        *rule,
-		Render:      *render,
+	if *displayInShell {
+		renderShell()
+	} else {
+		fmt.Println(" ->> Go to http://localhost:8888/text or http://localhost:8888/image and tweak parameters")
+		http.HandleFunc("/text", renderTextPage)
+		http.HandleFunc("/image", renderImagePage)
+		err := http.ListenAndServe(":8888", nil)
+		if err != nil {
+			panic("Server doesn't run")
+		}
 	}
 }

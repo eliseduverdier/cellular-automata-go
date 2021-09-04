@@ -15,13 +15,17 @@ type CellularAutomata struct {
 	RuleNumber     int
 }
 
+// var ruleArray []int
+
 // GetMatrix  Builds the matrix line after line
 func (c CellularAutomata) GetMatrix() [][]int {
+	ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
+
 	matrix := make([][]int, c.Rows)
 	matrix[0] = c.getFirstLine()
 	//for i:= range matrix {
 	for i := 0; i < c.Rows-1; i++ {
-		matrix[i+1] = c.getNextLine(matrix, i)
+		matrix[i+1] = c.getNextLine(matrix, i, ruleArray)
 	}
 	return matrix
 }
@@ -58,19 +62,19 @@ func (c CellularAutomata) getFirstLine() []int {
 	return cells
 }
 
-func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int) []int {
+func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int, ruleArray []int) []int {
 	newLine := make([]int, c.Columns)
 
 	// fmt.Println("---")
 	for i := 0; i < c.Columns; i++ {
-		newCellValue := c.newCell(i, currentLineIndex, matrix)
+		newCellValue := c.newCell(i, currentLineIndex, matrix, ruleArray)
 		newLine[i] = newCellValue
 	}
 
 	return newLine
 }
 
-func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][]int) int {
+func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][]int, ruleArray []int) int {
 
 	// fmt.Println(fmt.Sprintf("pos: %d, line: %d", position, currentLineIndex))
 	sumOfBaseCells := matrix[currentLineIndex][position] * 10
@@ -90,7 +94,8 @@ func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][
 
 	index, _ := strconv.ParseInt(strconv.Itoa(sumOfBaseCells), c.States, 10)
 
-	ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
+	// TODO: move that! no need to call the function each time !
+	// ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
 
 	res := int(ruleArray[index])
 	return res

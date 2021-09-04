@@ -19,7 +19,15 @@ Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementar
 go run main.go
 ```
 
-This will generate an image in `images/`
+Then go to http://localhost:8888/text or http://localhost:8888/image and tweak parameters
+
+Or use in the shell with
+
+```shell
+go run main.go --shell
+```
+
+This will generate an image in `images/` (or a text directly with the `-render=text`)
 
 ### command line options
 
@@ -43,8 +51,8 @@ go test tests/*_test.go
 
 ### Todo
 
-- [ ] add style checker
-- [ ] add web server
+- [x] add style checker
+- [x] add web server
 - [ ] add docker
 
 ### install latest go version on ubuntu

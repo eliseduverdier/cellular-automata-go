@@ -9,7 +9,7 @@ import (
 )
 
 // GenerateImage  saves a PNG from the cellular automata's matrix
-func GenerateImage(matrix [][]int, metadata map[string]int) {
+func GenerateImage(matrix [][]int, metadata map[string]int) *image.RGBA {
 
 	width := len(matrix)
 	height := len(matrix[0])
@@ -33,19 +33,22 @@ func GenerateImage(matrix [][]int, metadata map[string]int) {
 		{58, 252, 129, 0xff},
 	}
 
-	// Set color for each pixel.
 	for x := 0; x < width; x++ {
 		for y := 0; y < height; y++ {
 			img.Set(x, y, colors[matrix[x][y]])
 		}
 	}
 
-	imageName := fmt.Sprintf("s%d-o%d-r%d", metadata["states"], metadata["order"], metadata["rule"])
-
 	// Encode as PNG.
-	f, _ := os.Create("images/" + imageName + ".png")
+	f, _ := os.Create("images/" + GetImageName(metadata) + ".png")
 	err := png.Encode(f, img)
 	if err != nil {
 		panic("Could not generate image")
 	}
+
+	return img
+}
+
+func GetImageName(metadata map[string]int) string {
+	return fmt.Sprintf("s%d-o%d-r%d", metadata["states"], metadata["order"], metadata["rule"])
 }
