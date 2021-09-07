@@ -1,4 +1,4 @@
-package main
+package automata
 
 import (
 	"reflect"
@@ -68,7 +68,6 @@ func TestCellularAuto3states2ndOrder(t *testing.T) {
 
 func TestCellularAutoImageName(t *testing.T) {
 	firstLine := automata.FirstLine{automata.GetCenteredLine(3, 2)}
-
 	actual := automata.CellularAutomata{3, 2, 3, 3, 123, firstLine}.GetMetadata()
 
 	expected := map[string]int{

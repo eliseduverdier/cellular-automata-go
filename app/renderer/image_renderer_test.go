@@ -1,4 +1,4 @@
-package main
+package renderer
 
 import (
 	_ "fmt"
@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	_ "github.com/eliseduverdier/cellular-automata-go/app/automata"
-	_ "github.com/eliseduverdier/cellular-automata-go/app/renderer"
 )
 
 func TestImage(t *testing.T) {

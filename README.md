@@ -68,7 +68,10 @@ Example: `go run main.go -s=5 -o=2 -r=12345 -w=30 -h=10 -render=text` will rende
 ## Run test
 
 ```shell
-go test tests/*_test.go
+# basic
+go test ./..
+# generate code coverage
+go test -v -coverprofile test-coverage.html ./..
 ```
 
 # Etc
