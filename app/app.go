@@ -11,12 +11,12 @@ import (
 func Render(params parameters.Parameters) string {
 
 	automata := automata.CellularAutomata{
-		States:         params.States,
-		Order:          params.Order,
-		Columns:        params.Columns,
-		Rows:           params.Rows,
-		HasRandomStart: params.RandomStart,
-		RuleNumber:     params.Rule,
+		States:        params.States,
+		Order:         params.Order,
+		Columns:       params.Columns,
+		Rows:          params.Rows,
+		FirstLineType: params.Start,
+		RuleNumber:    params.Rule,
 	}
 
 	switch params.Render {
@@ -34,12 +34,12 @@ func Render(params parameters.Parameters) string {
 func RenderText(params parameters.Parameters) string {
 
 	automata := automata.CellularAutomata{
-		States:         params.States,
-		Order:          params.Order,
-		Columns:        params.Columns,
-		Rows:           params.Rows,
-		HasRandomStart: params.RandomStart,
-		RuleNumber:     params.Rule,
+		States:        params.States,
+		Order:         params.Order,
+		Columns:       params.Columns,
+		Rows:          params.Rows,
+		FirstLineType: params.Start,
+		RuleNumber:    params.Rule,
 	}
 
 	return renderer.GenerateText(automata.GetMatrix(), automata.GetMetadata())
@@ -48,12 +48,12 @@ func RenderText(params parameters.Parameters) string {
 func RenderImage(params parameters.Parameters) *image.RGBA {
 
 	automata := automata.CellularAutomata{
-		States:         params.States,
-		Order:          params.Order,
-		Columns:        params.Columns,
-		Rows:           params.Rows,
-		HasRandomStart: params.RandomStart,
-		RuleNumber:     params.Rule,
+		States:        params.States,
+		Order:         params.Order,
+		Columns:       params.Columns,
+		Rows:          params.Rows,
+		FirstLineType: params.Start,
+		RuleNumber:    params.Rule,
 	}
 
 	return renderer.GenerateImage(automata.GetMatrix(), automata.GetMetadata())

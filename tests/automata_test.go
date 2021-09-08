@@ -9,12 +9,12 @@ import (
 
 func TestCellularAuto2states1order(t *testing.T) {
 	actual := automata.CellularAutomata{
-		States:         2,
-		Order:          1,
-		Columns:        5,
-		Rows:           5,
-		HasRandomStart: false,
-		RuleNumber:     110,
+		States:        2,
+		Order:         1,
+		Columns:       5,
+		Rows:          5,
+		FirstLineType: "centered",
+		RuleNumber:    110,
 	}.GetMatrix()
 
 	expected := [][]int{
@@ -31,7 +31,7 @@ func TestCellularAuto2states1order(t *testing.T) {
 }
 
 func TestCellularAutoRectangle(t *testing.T) {
-	actual := automata.CellularAutomata{2, 1, 10, 3, false, 110}.GetMatrix()
+	actual := automata.CellularAutomata{2, 1, 10, 3, "centered", 110}.GetMatrix()
 
 	expected := [][]int{
 		{0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
@@ -45,7 +45,7 @@ func TestCellularAutoRectangle(t *testing.T) {
 }
 
 func TestCellularAuto3states2ndOrder(t *testing.T) {
-	actual := automata.CellularAutomata{3, 2, 8, 8, false, 145194}.GetMatrix()
+	actual := automata.CellularAutomata{3, 2, 8, 8, "centered", 145194}.GetMatrix()
 
 	expected := [][]int{
 		{0, 0, 0, 2, 1, 2, 0, 0},
@@ -63,7 +63,7 @@ func TestCellularAuto3states2ndOrder(t *testing.T) {
 	}
 }
 func TestCellularAutoRandom(t *testing.T) {
-	actual := automata.CellularAutomata{3, 2, 10, 1, true, 0}.GetMatrix()
+	actual := automata.CellularAutomata{3, 2, 10, 1, "random", 0}.GetMatrix()
 
 	notExpected := [][]int{
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -75,7 +75,7 @@ func TestCellularAutoRandom(t *testing.T) {
 }
 
 func TestCellularAutoImageName(t *testing.T) {
-	actual := automata.CellularAutomata{3, 2, 3, 3, false, 123}.GetMetadata()
+	actual := automata.CellularAutomata{3, 2, 3, 3, "centered", 123}.GetMetadata()
 
 	expected := map[string]int{
 		"states": 3,

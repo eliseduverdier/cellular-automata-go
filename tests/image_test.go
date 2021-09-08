@@ -15,7 +15,7 @@ func TestImage(t *testing.T) {
 	        Order: 1,
 	        Columns: 5,
 	        Rows: 5,
-	        HasRandomStart: false,
+	        FirstLineType: "centered",
 	        RuleNumber: 123,
 	    }
 		renderer.GenerateImage(automata.GetMatrix(), automata.GetMetadata())

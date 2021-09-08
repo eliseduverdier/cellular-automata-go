@@ -1,18 +1,17 @@
 package automata
 
 import (
-	"math/rand"
 	"strconv"
 )
 
 // CellularAutomata  The cellular automata structure
 type CellularAutomata struct {
-	States         int
-	Order          int
-	Columns        int
-	Rows           int
-	HasRandomStart bool
-	RuleNumber     int
+	States        int
+	Order         int
+	Columns       int
+	Rows          int
+	FirstLineType string
+	RuleNumber    int
 }
 
 // var ruleArray []int
@@ -22,7 +21,7 @@ func (c CellularAutomata) GetMatrix() [][]int {
 	ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
 
 	matrix := make([][]int, c.Rows)
-	matrix[0] = c.getFirstLine()
+	matrix[0] = c.getFirstLine(c.FirstLineType)
 	//for i:= range matrix {
 	for i := 0; i < c.Rows-1; i++ {
 		matrix[i+1] = c.getNextLine(matrix, i, ruleArray)
@@ -39,27 +38,18 @@ func (c CellularAutomata) GetMetadata() map[string]int {
 	}
 }
 
-func (c CellularAutomata) getFirstLine() []int {
-	cells := make([]int, c.Columns)
-
-	if c.HasRandomStart {
-		for i := range cells {
-			cells[i] = rand.Intn(c.States)
-		}
-	} else {
-		for i := range cells {
-			cells[i] = 0
-		}
-		// Fill intermediates colors like this [0001234321000]
-		for i := 0; i < c.States; i++ {
-			offset := i - 1
-			middle := c.Columns / 2
-			cells[middle+offset] = i
-			cells[middle-offset] = i
-		}
+// getFirstLine TODO strategy type ?
+func (c CellularAutomata) getFirstLine(strategy string) []int {
+	switch strategy {
+	case "centered":
+		return c.GetCenteredLine()
+	case "custom":
+		return c.GetCustomLine() // <- TODO get array from custom line
+	case "word":
+		return c.GetWordLine() // <- TODO get word
+	default: //case "random":
+		return c.GetRandomLine()
 	}
-
-	return cells
 }
 
 func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int, ruleArray []int) []int {
