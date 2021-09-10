@@ -13,8 +13,7 @@ func RenderTextPage(w http.ResponseWriter, req *http.Request) {
 
 	req.Header.Add("Application", "text/html")
 	fmt.Fprintf(w,
-		"<h1>Hello Cellular Automata</h1>"+
-			"<pre>%s</pre>",
+		"<html><body><pre>%s</pre></body></html>",
 		image,
 	)
 }

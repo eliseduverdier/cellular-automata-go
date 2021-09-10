@@ -38,7 +38,7 @@ func GenerateTitle(metadata map[string]int) string {
 		`
 		 ╔═════════════════════════╗
 		 ║ States: %d  Order: %d     ║
-		 ║ Rule: %10d      ║
+		 ║ Rule: %12d      ║
 		 ╚═════════════════════════╝`,
 		metadata["states"],
 		metadata["order"],
