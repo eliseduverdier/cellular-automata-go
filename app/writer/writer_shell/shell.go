@@ -1,4 +1,4 @@
-package writer
+package writer_shell
 
 import (
 	"github.com/eliseduverdier/cellular-automata-go/app"

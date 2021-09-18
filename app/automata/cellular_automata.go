@@ -17,11 +17,11 @@ type CellularAutomata struct {
 // var ruleArray []int
 
 // GetMatrix  Builds the matrix line after line
-func (c CellularAutomata) GetMatrix() [][]int {
+func (c CellularAutomata) GetMatrix( /* options []string */ ) [][]int {
 	ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
 
 	matrix := make([][]int, c.Rows)
-	matrix[0] = c.getFirstLine(c.FirstLineType)
+	matrix[0] = c.getFirstLine(c.FirstLineType /* , options */)
 	//for i:= range matrix {
 	for i := 0; i < c.Rows-1; i++ {
 		matrix[i+1] = c.getNextLine(matrix, i, ruleArray)
@@ -39,14 +39,14 @@ func (c CellularAutomata) GetMetadata() map[string]int {
 }
 
 // getFirstLine TODO strategy type ?
-func (c CellularAutomata) getFirstLine(strategy string) []int {
+func (c CellularAutomata) getFirstLine(strategy string /* , options []string */) []int {
 	switch strategy {
 	case "centered":
 		return c.GetCenteredLine()
 	case "custom":
 		return c.GetCustomLine() // <- TODO get array from custom line
 	case "word":
-		return c.GetWordLine() // <- TODO get word
+		return c.GetWordLine( /* options */ ) // <- TODO get word
 	default: //case "random":
 		return c.GetRandomLine()
 	}

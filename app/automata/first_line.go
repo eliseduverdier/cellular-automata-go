@@ -45,10 +45,11 @@ func (c CellularAutomata) GetCustomLine() []int {
 }
 
 // GetWordLine TODO get word from command
+// word:
 // /!\ Only works with RenderAsText()
-func (c CellularAutomata) GetWordLine() []int {
+func (c CellularAutomata) GetWordLine( /* word string */ ) []int {
 
-	word := [...]int{1, 2, 3, 4} // Should have been mapped to ints before
+	word := [...]int{1, 2, 3, 4}
 
 	cells := make([]int, c.Columns)
 

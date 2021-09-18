@@ -1,4 +1,4 @@
-package writer
+package writer_http
 
 import (
 	"image/png"

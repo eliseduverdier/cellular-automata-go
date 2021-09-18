@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cellular Automata</title>
+</head>
+
+<body>
+  <h1>Make your own automata</h1>
+  <hr>
+  <form action="">
+    {{range $val := .Checkboxes}}
+    <input type="checkbox" name=i[{{$val}}] value="1">
+    {{end}}
+    <button type="submit">go</button>
+  </form>
+</body>
+
+</html>
