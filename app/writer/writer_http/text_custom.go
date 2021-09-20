@@ -25,5 +25,8 @@ func RenderCustomTextPage(w http.ResponseWriter, req *http.Request) {
 	templatePath := filepath.Join(cwd, "app/renderer/templates/custom.html")
 
 	t, _ := template.ParseFiles(templatePath)
-	t.Execute(w, page)
+	err := t.Execute(w, page)
+	if err != nil {
+		panic(err) // ...
+	}
 }
