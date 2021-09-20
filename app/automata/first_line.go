@@ -4,17 +4,21 @@ import (
 	"math/rand"
 )
 
+type FirstLine struct {
+	Sequence []int
+}
+
 // GetCenteredLine
-func (c CellularAutomata) GetCenteredLine() []int {
-	cells := make([]int, c.Columns)
+func GetCenteredLine(length int, states int) []int {
+	cells := make([]int, length)
 
 	for i := range cells {
 		cells[i] = 0
 	}
 	// Fill intermediates colors like this [0001234321000]
-	for i := 0; i < c.States; i++ {
+	for i := 0; i < states; i++ {
 		offset := i - 1
-		middle := c.Columns / 2
+		middle := length / 2
 		cells[middle+offset] = i
 		cells[middle-offset] = i
 	}
@@ -23,34 +27,22 @@ func (c CellularAutomata) GetCenteredLine() []int {
 }
 
 // GetRandomLine
-func (c CellularAutomata) GetRandomLine() []int {
-	cells := make([]int, c.Columns)
+func GetRandomLine(length int, states int) []int {
+	cells := make([]int, length)
 
 	for i := range cells {
-		cells[i] = rand.Intn(c.States)
+		cells[i] = rand.Intn(states)
 	}
 
 	return cells
 }
 
-// GetCustomLine TODO get from command, for now get every odd index
-func (c CellularAutomata) GetCustomLine() []int {
-	cells := make([]int, c.Columns)
+// GetWordLine TODO get word from command, /!\ Will only works with RenderAsText() and custom letters (not yet implemented)
+func GetWordLine(length int, states int /* word string */) []int {
 
-	for i := range cells {
-		cells[i] = 2 % i
-	}
+	word := [...]int{1, 2, 3, 4}
 
-	return cells
-}
-
-// GetWordLine TODO get word from command
-// /!\ Only works with RenderAsText()
-func (c CellularAutomata) GetWordLine() []int {
-
-	word := [...]int{1, 2, 3, 4} // Should have been mapped to ints before
-
-	cells := make([]int, c.Columns)
+	cells := make([]int, length)
 
 	for i := range cells {
 		cells[i] = word[i%len(word)]

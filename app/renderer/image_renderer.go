@@ -11,8 +11,8 @@ import (
 // GenerateImage  saves a PNG from the cellular automata's matrix
 func GenerateImage(matrix [][]int, metadata map[string]int) *image.RGBA {
 
-	width := len(matrix)
-	height := len(matrix[0])
+	width := len(matrix[0])
+	height := len(matrix)
 
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{width, height}
@@ -33,9 +33,9 @@ func GenerateImage(matrix [][]int, metadata map[string]int) *image.RGBA {
 		{58, 252, 129, 0xff},
 	}
 
-	for x := 0; x < width; x++ {
-		for y := 0; y < height; y++ {
-			img.Set(x, y, colors[matrix[x][y]])
+	for x := 0; x < height; x++ {
+		for y := 0; y < width; y++ {
+			img.Set(y, x, colors[matrix[x][y]])
 		}
 	}
 

@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/eliseduverdier/cellular-automata-go/app/automata"
 )
@@ -14,7 +15,7 @@ type Parameters struct {
 	Order   int
 	Columns int
 	Rows    int
-	Start   string
+	Start   []int
 	Rule    int
 	Render  string
 }
@@ -25,7 +26,8 @@ func GetFromRequest(req *http.Request) Parameters {
 	width, _ := strconv.Atoi(req.URL.Query().Get("w"))
 	height, _ := strconv.Atoi(req.URL.Query().Get("h"))
 	rule, _ := strconv.Atoi(req.URL.Query().Get("r"))
-	firstLineType := req.URL.Query().Get("start")
+	firstLineType := req.URL.Query().Get("start") // will be used later to generate the first line early
+
 	// Set defaults, TODO save elsewhere
 	if states == 0 {
 		states = 2
@@ -43,13 +45,27 @@ func GetFromRequest(req *http.Request) Parameters {
 		rule = rand.Intn(automata.GetMaxRule(automata.GetMaxStates(states, order)))
 	}
 
+	// Generate first line from appropriate parameters
+
+	firstLine := make([]int, width)
+	if firstLineType == "centered" {
+		firstLine = automata.GetCenteredLine(width, states)
+	} else if firstLineType == "random" {
+		firstLine = automata.GetRandomLine(width, states)
+	} else {
+		line := strings.Split(req.URL.Query().Get("line"), "")
+		for i, v := range line {
+			firstLine[i], _ = strconv.Atoi(v)
+		}
+	}
+
 	return Parameters{
 		States:  states,
 		Order:   order,
 		Columns: width,
 		Rows:    height,
 		Rule:    rule,
-		Start:   firstLineType,
+		Start:   firstLine,
 		Render:  "image",
 	}
 }
@@ -57,20 +73,35 @@ func GetFromRequest(req *http.Request) Parameters {
 func GetFromShell() Parameters {
 	states := flag.Int("s", 2, "the number of states")
 	order := flag.Int("o", 1, "the order (1 or 2)")
-	columns := flag.Int("w", 100, "the number of columns")
-	rows := flag.Int("h", 100, "the number of rows")
+	width := flag.Int("w", 100, "the number of columns")
+	height := flag.Int("h", 100, "the number of rows")
 	rule := flag.Int("r", 73, "the rule number")
-	start := flag.String("start", "random", "the type of first line (random, centered, custom, word)")
+
+	firstLineType := flag.String("start", "random", "the type of first line if automatically generated (random, centered)")
+	firstLineContent := flag.String("line", "1", "the content of the first line")
+
+	firstLine := make([]int, *width)
+	if *firstLineType == "centered" {
+		firstLine = automata.GetCenteredLine(*width, *states)
+	} else if *firstLineType == "random" {
+		firstLine = automata.GetRandomLine(*width, *states)
+	} else {
+		line := strings.Split(*firstLineContent, "")
+		for i, v := range line {
+			firstLine[i], _ = strconv.Atoi(v)
+		}
+	}
+
 	render := flag.String("render", "image", "image|text")
 
-	flag.Parse()
+	flag.Parse() // FIXME: shell params were already parsed in shell.go>RenderShell, cannot parse again
 
 	return Parameters{
 		States:  *states,
 		Order:   *order,
-		Columns: *columns,
-		Rows:    *rows,
-		Start:   *start,
+		Columns: *width,
+		Rows:    *height,
+		Start:   firstLine,
 		Rule:    *rule,
 		Render:  *render,
 	}

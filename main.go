@@ -2,10 +2,9 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"net/http"
 
-	"github.com/eliseduverdier/cellular-automata-go/app/writer"
+	"github.com/eliseduverdier/cellular-automata-go/app/writer/writer_http"
+	"github.com/eliseduverdier/cellular-automata-go/app/writer/writer_shell"
 )
 
 func main() {
@@ -13,14 +12,8 @@ func main() {
 	flag.Parse()
 
 	if *displayInShell {
-		writer.RenderShell()
+		writer_shell.RenderShell()
 	} else {
-		fmt.Println(" ->> Go to http://localhost:8888/text or http://localhost:8888/image and tweak parameters")
-		http.HandleFunc("/text", writer.RenderTextPage)
-		http.HandleFunc("/image", writer.RenderImagePage)
-		err := http.ListenAndServe(":8888", nil)
-		if err != nil {
-			panic("Server doesn't run")
-		}
+		writer_http.RenderHttp()
 	}
 }

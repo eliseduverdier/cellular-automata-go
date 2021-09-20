@@ -15,8 +15,8 @@ func TestImage(t *testing.T) {
 	        Order: 1,
 	        Columns: 5,
 	        Rows: 5,
-	        FirstLineType: "centered",
 	        RuleNumber: 123,
+	        FirstLine: automata.FirstLine({[1,1,1,0,0]}),
 	    }
 		renderer.GenerateImage(automata.GetMatrix(), automata.GetMetadata())
 

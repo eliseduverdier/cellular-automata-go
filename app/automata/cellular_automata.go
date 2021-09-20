@@ -6,23 +6,20 @@ import (
 
 // CellularAutomata  The cellular automata structure
 type CellularAutomata struct {
-	States        int
-	Order         int
-	Columns       int
-	Rows          int
-	FirstLineType string
-	RuleNumber    int
+	States     int
+	Order      int
+	Columns    int
+	Rows       int
+	RuleNumber int
+	FirstLine  FirstLine
 }
-
-// var ruleArray []int
 
 // GetMatrix  Builds the matrix line after line
 func (c CellularAutomata) GetMatrix() [][]int {
 	ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
 
 	matrix := make([][]int, c.Rows)
-	matrix[0] = c.getFirstLine(c.FirstLineType)
-	//for i:= range matrix {
+	matrix[0] = c.FirstLine.Sequence
 	for i := 0; i < c.Rows-1; i++ {
 		matrix[i+1] = c.getNextLine(matrix, i, ruleArray)
 	}
@@ -38,24 +35,9 @@ func (c CellularAutomata) GetMetadata() map[string]int {
 	}
 }
 
-// getFirstLine TODO strategy type ?
-func (c CellularAutomata) getFirstLine(strategy string) []int {
-	switch strategy {
-	case "centered":
-		return c.GetCenteredLine()
-	case "custom":
-		return c.GetCustomLine() // <- TODO get array from custom line
-	case "word":
-		return c.GetWordLine() // <- TODO get word
-	default: //case "random":
-		return c.GetRandomLine()
-	}
-}
-
 func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int, ruleArray []int) []int {
 	newLine := make([]int, c.Columns)
 
-	// fmt.Println("---")
 	for i := 0; i < c.Columns; i++ {
 		newCellValue := c.newCell(i, currentLineIndex, matrix, ruleArray)
 		newLine[i] = newCellValue
@@ -66,7 +48,6 @@ func (c CellularAutomata) getNextLine(matrix [][]int, currentLineIndex int, rule
 
 func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][]int, ruleArray []int) int {
 
-	// fmt.Println(fmt.Sprintf("pos: %d, line: %d", position, currentLineIndex))
 	sumOfBaseCells := matrix[currentLineIndex][position] * 10
 
 	// handle diagonals cells on the sides: loop to the other side
@@ -83,9 +64,6 @@ func (c CellularAutomata) newCell(position int, currentLineIndex int, matrix [][
 	}
 
 	index, _ := strconv.ParseInt(strconv.Itoa(sumOfBaseCells), c.States, 10)
-
-	// TODO: move that! no need to call the function each time !
-	// ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
 
 	res := int(ruleArray[index])
 	return res
