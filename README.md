@@ -10,7 +10,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/eliseduverdier/cellular-automata-go)](https://goreportcard.com/report/github.com/eliseduverdier/cellular-automata-go)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c24524e60f6020b406a3/maintainability)](https://codeclimate.com/github/eliseduverdier/cellular-automata-go/maintainability)
 
-Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) images, with 2 to 9 states, or 1st and 2nd order, with customizable size, colors, and points distribution, using Go
+Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) images, with 2 to 9 states, or 1st and 2nd order, with customizable size, ~colors~, and points distribution, using Go
 
 - As PNG images
 
@@ -55,23 +55,24 @@ This will generate an image in `images/` (or a text directly with the `-render=t
 ### command line options & get parameters
 
 Example: `go run main.go -s=5 -o=2 -r=12345 -w=30 -h=10 -render=text` will render the automata #12345 of 2nd order with 5 sates, in text directly to the console, showing 30 columns of characters, and 10 rows.
-| option | role |
-|---|---|
-| s | number of states ()>2) |
-| o | order (1 or 2) |
-| r | rule number |
-| w | width in pixels |
-| h | height in pixels |
-| random_start | first line |
-| render | 'image' or 'text' |
+option | role
+-------|------
+s | number of states ()>2)
+o | order (1 or 2)
+r | rule number
+w | width in pixels
+h | height in pixels
+render | 'image' or 'text' for shell environement only
+start | first line strategy ("random", "centered", or "custom", see below)
+line | if no start strategy is defined, we expect a sequence of numbers representing the first line "0..." by default
 
 ## Run test
 
 ```shell
-# basic
-go test ./..
+# Run test recursively in all subfolders
+go test ./...
 # generate code coverage
-go test -v -coverprofile test-coverage.html ./..
+go test -v -coverprofile test-coverage.html ./...
 ```
 
 # Etc

@@ -1,5 +1,7 @@
 package writer_http
 
+// Not used for the moment
+
 import (
 	"html/template"
 	"net/http"
@@ -7,10 +9,12 @@ import (
 	"path/filepath"
 )
 
+// Page with data to display
 type Page struct {
 	Checkboxes []int
 }
 
+// RenderCustomTextPage renders a page with checkboxes, that will determine the first line
 func RenderCustomTextPage(w http.ResponseWriter, req *http.Request) {
 	// TODO get first line array from req.URL.Query().Get("i")
 

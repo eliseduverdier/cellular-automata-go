@@ -39,8 +39,8 @@ func GenerateImage(matrix [][]int, metadata map[string]int) *image.RGBA {
 		}
 	}
 
-	// Encode as PNG.
-	f, _ := os.Create("images/" + GetImageName(metadata) + ".png")
+	// Encode as PNG. TODO Fix relative path error, fail from tests !
+	f, _ := os.Create( /* "/images/" +  */ GetImageName(metadata) + ".png")
 	err := png.Encode(f, img)
 	if err != nil {
 		panic("Could not generate image")

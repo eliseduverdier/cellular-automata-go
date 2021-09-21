@@ -27,6 +27,7 @@ func GetFromRequest(req *http.Request) Parameters {
 	height, _ := strconv.Atoi(req.URL.Query().Get("h"))
 	rule, _ := strconv.Atoi(req.URL.Query().Get("r"))
 	firstLineType := req.URL.Query().Get("start") // will be used later to generate the first line early
+	firstLineContent := req.URL.Query().Get("line")
 
 	// Set defaults, TODO save elsewhere
 	if states == 0 {
@@ -50,13 +51,13 @@ func GetFromRequest(req *http.Request) Parameters {
 	firstLine := make([]int, width)
 	if firstLineType == "centered" {
 		firstLine = automata.GetCenteredLine(width, states)
-	} else if firstLineType == "random" {
-		firstLine = automata.GetRandomLine(width, states)
-	} else {
-		line := strings.Split(req.URL.Query().Get("line"), "")
+	} else if firstLineContent != "" {
+		line := strings.Split(firstLineContent, "")
 		for i, v := range line {
 			firstLine[i], _ = strconv.Atoi(v)
 		}
+	} else {
+		firstLine = automata.GetRandomLine(width, states)
 	}
 
 	return Parameters{

@@ -8,6 +8,7 @@ import (
 	"github.com/eliseduverdier/cellular-automata-go/app/parameters"
 )
 
+// RenderTextPage Displays the automata as a text in an html page
 func RenderTextPage(w http.ResponseWriter, req *http.Request) {
 	image := app.RenderText(parameters.GetFromRequest(req))
 

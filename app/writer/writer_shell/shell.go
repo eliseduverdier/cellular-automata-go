@@ -5,6 +5,7 @@ import (
 	"github.com/eliseduverdier/cellular-automata-go/app/parameters"
 )
 
+// RenderShell creates or display an automata from shell
 func RenderShell() {
 	params := parameters.GetFromShell()
 	app.Render(params)

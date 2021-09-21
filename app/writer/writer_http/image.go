@@ -8,6 +8,7 @@ import (
 	"github.com/eliseduverdier/cellular-automata-go/app/parameters"
 )
 
+// RenderImagePage renders a PNG image in the request
 func RenderImagePage(w http.ResponseWriter, req *http.Request) {
 	image := app.RenderImage(parameters.GetFromRequest(req))
 

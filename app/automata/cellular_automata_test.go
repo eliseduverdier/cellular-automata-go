@@ -3,18 +3,16 @@ package automata
 import (
 	"reflect"
 	"testing"
-
-	"github.com/eliseduverdier/cellular-automata-go/app/automata"
 )
 
 func TestCellularAuto2states1order(t *testing.T) {
-	actual := automata.CellularAutomata{
+	actual := CellularAutomata{
 		States:     2,
 		Order:      1,
 		Columns:    5,
 		Rows:       5,
 		RuleNumber: 110,
-		FirstLine:  automata.FirstLine{Sequence: []int{0, 0, 1, 0, 0}},
+		FirstLine:  FirstLine{Sequence: []int{0, 0, 1, 0, 0}},
 	}.GetMatrix()
 
 	expected := [][]int{
@@ -31,8 +29,8 @@ func TestCellularAuto2states1order(t *testing.T) {
 }
 
 func TestCellularAutoRectangle(t *testing.T) {
-	firstLine := automata.FirstLine{automata.GetCenteredLine(10, 2)}
-	actual := automata.CellularAutomata{2, 1, 10, 3, 110, firstLine}.GetMatrix()
+	firstLine := FirstLine{GetCenteredLine(10, 2)}
+	actual := CellularAutomata{2, 1, 10, 3, 110, firstLine}.GetMatrix()
 
 	expected := [][]int{
 		{0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
@@ -46,9 +44,8 @@ func TestCellularAutoRectangle(t *testing.T) {
 }
 
 func TestCellularAuto3states2ndOrder(t *testing.T) {
-	firstLine := automata.FirstLine{automata.GetCenteredLine(8, 3)}
-
-	actual := automata.CellularAutomata{3, 2, 8, 8, 145194, firstLine}.GetMatrix()
+	firstLine := FirstLine{GetCenteredLine(8, 3)}
+	actual := CellularAutomata{3, 2, 8, 8, 145194, firstLine}.GetMatrix()
 
 	expected := [][]int{
 		{0, 0, 0, 2, 1, 2, 0, 0},
@@ -67,8 +64,8 @@ func TestCellularAuto3states2ndOrder(t *testing.T) {
 }
 
 func TestCellularAutoImageName(t *testing.T) {
-	firstLine := automata.FirstLine{automata.GetCenteredLine(3, 2)}
-	actual := automata.CellularAutomata{3, 2, 3, 3, 123, firstLine}.GetMetadata()
+	firstLine := FirstLine{GetCenteredLine(3, 2)}
+	actual := CellularAutomata{3, 2, 3, 3, 123, firstLine}.GetMetadata()
 
 	expected := map[string]int{
 		"states": 3,
