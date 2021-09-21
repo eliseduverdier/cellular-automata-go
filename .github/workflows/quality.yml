@@ -36,23 +36,20 @@ jobs:
     - name: Run tests
       run: go test -v ./...
 
-    # - name: Get coverage -> send to codeclimate
-    #   run: go test -v -coverprofile test-coverage.html ./..
+  # coverage:
+  #   needs: [ test ]
+  #   name: coverage
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-  coverage:
-    needs: [ test ]
-    name: coverage
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
+  #   - name: Set up Go
+  #     uses: actions/setup-go@v2
+  #     with:
+  #       go-version: 1.13
 
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.13
-
-    - uses: paambaati/codeclimate-action@v2.2.4
-      env:
-        CC_TEST_REPORTER_ID: e59a5737675296f927e7c58daa3345e437740a908db15278095d1fb3fedbd06e
-      with:
-        coverageCommand: go test ./... -coverprofile=c.out
+  #   - uses: ????
+  #     env:
+  #       CC_TEST_REPORTER_ID: e59a5737675296f927e7c58daa3345e437740a908db15278095d1fb3fedbd06e
+  #     with:
+  #       coverageCommand: go test ./... -coverprofile=c.out

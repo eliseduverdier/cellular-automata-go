@@ -1,7 +1,6 @@
 package writer_http
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -23,8 +22,6 @@ func TestRenderImagePage(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	fmt.Println(">>>>>>>>>>>")
-	fmt.Println(rr.HeaderMap)
 	expected := "image/png"
 	actual := rr.Header().Get("Content-Type")
 	//Check the response body is an image
