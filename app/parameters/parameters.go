@@ -28,6 +28,7 @@ func GetFromRequest(req *http.Request) Parameters {
 	rule, _ := strconv.Atoi(req.URL.Query().Get("r"))
 	firstLineType := req.URL.Query().Get("start") // will be used later to generate the first line early
 	firstLineContent := req.URL.Query().Get("line")
+	renderType := req.URL.Path[1:]
 
 	// Set defaults, TODO save elsewhere
 	if states == 0 {
@@ -40,7 +41,7 @@ func GetFromRequest(req *http.Request) Parameters {
 		width = 100
 	}
 	if height == 0 {
-		height = 100
+		height = width
 	}
 	if rule == 0 {
 		rule = rand.Intn(automata.GetMaxRule(automata.GetMaxStates(states, order)))
@@ -67,7 +68,7 @@ func GetFromRequest(req *http.Request) Parameters {
 		Rows:    height,
 		Rule:    rule,
 		Start:   firstLine,
-		Render:  "image",
+		Render:  renderType,
 	}
 }
 

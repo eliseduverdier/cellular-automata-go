@@ -6,7 +6,8 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/eliseduverdier/cellular-automata-go?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/eliseduverdier/cellular-automata-go?style=flat-square)
 
-![Tests status](https://github.com/eliseduverdier/cellular-automata-go/actions/workflows/quality.yml/badge.svg)
+![CI status](https://github.com/eliseduverdier/cellular-automata-go/actions/workflows/quality.yml/badge.svg)
+[![codecov](https://codecov.io/gh/eliseduverdier/cellular-automata-go/branch/main/graph/badge.svg?token=OIW9T63RAI)](https://codecov.io/gh/eliseduverdier/cellular-automata-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/eliseduverdier/cellular-automata-go)](https://goreportcard.com/report/github.com/eliseduverdier/cellular-automata-go)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c24524e60f6020b406a3/maintainability)](https://codeclimate.com/github/eliseduverdier/cellular-automata-go/maintainability)
 

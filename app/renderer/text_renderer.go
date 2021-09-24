@@ -6,7 +6,6 @@ import (
 
 // GenerateText  Prints the cellular automata to the console
 func GenerateText(matrix [][]int, metadata map[string]int) string {
-
 	colors := []string{
 		"█",
 		" ",

@@ -36,17 +36,3 @@ func GetRandomLine(length int, states int) []int {
 
 	return cells
 }
-
-// GetWordLine TODO get word from command, /!\ Will only works with RenderAsText() and custom letters (not yet implemented)
-func GetWordLine(length int, states int /* word string */) []int {
-
-	word := [...]int{1, 2, 3, 4}
-
-	cells := make([]int, length)
-
-	for i := range cells {
-		cells[i] = word[i%len(word)]
-	}
-
-	return cells
-}
