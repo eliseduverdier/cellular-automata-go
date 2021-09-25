@@ -13,11 +13,11 @@
 
 Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) images, with 2 to 9 states, or 1st and 2nd order, with customizable size, ~colors~, and points distribution, using Go
 
-- As PNG images
+- As PNG images (rule 73)
 
-  <img src="images/s2-o1-r73.png">
+  <img src="images/sample.png">
 
-- Or as text
+- Or as text (rule 110)
 
 ```
 ██ █ █    ██  ███ █ ███   ██ █ █   ██   █  ██
@@ -67,13 +67,15 @@ render | 'image' or 'text' for shell environement only
 start | first line strategy ("random", "centered", or "custom", see below)
 line | if no start strategy is defined, we expect a sequence of numbers representing the first line "0..." by default
 
-## Run test
+## Run tests
 
 ```shell
 # Run test recursively in all subfolders
 go test ./...
 # generate code coverage
 go test -v -coverprofile test-coverage.html ./...
+# display code coverage as html
+go tool cover -html=coverage.out
 ```
 
 # Etc
@@ -81,9 +83,12 @@ go test -v -coverprofile test-coverage.html ./...
 ## Todo
 
 - [ ] add docker
-- [ ] code coverage
+- [x] code coverage
 - [ ] add option to get dots bigger than 1px
-- [ ] add stragety pattern for the first line (random|single point|word|custom)
+- [ ] add option to choose custom colors
+- [x] add stragety pattern for the first line (random|centered|custom)
+- [x] add end point to get custom first line
+- [ ] add a way to generate the automata on demand from the custom first line
 
 ### install latest go version on ubuntu
 
