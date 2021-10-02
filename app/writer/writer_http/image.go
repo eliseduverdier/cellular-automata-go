@@ -10,9 +10,10 @@ import (
 
 // RenderImagePage renders a PNG image in the request
 func RenderImagePage(w http.ResponseWriter, req *http.Request) {
-	image := app.RenderImage(parameters.GetFromRequest(req))
+	image, name := app.RenderImage(parameters.GetFromRequest(req))
 
 	w.Header().Set("Content-Type", "image/png")
+	w.Header().Set("Filename", name)
 	err := png.Encode(w, image)
 	if err != nil {
 		panic("Image couldn’t be encoded")

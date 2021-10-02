@@ -45,10 +45,14 @@ func TestRenderTextImage(t *testing.T) {
 // func TestRenderImage(t *testing.T) {
 // params := parameters.Parameters{2, 1, 10, 10, []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 110, "image"}
 
-// actual := RenderImage(params)
-// expected := "s2-o1-r110"
-// if actual != os.get() {
-// 	t.Errorf("Test render error, expected %s, got %s.", expected, actual)
+// actualImage, actualName := RenderImage(params)
+// expectedImage := get the one in tests/testdata/
+// expectedName := "s2-o1-r110"
+// if expectedName != actualName {
+// 	t.Errorf("Test render error, expected name %s, got %s.", expected, actual)
+// }
+// if expectedImage != actualImage {
+// 	t.Errorf("Test render error, expected image %s, got %s.", expected, actual)
 // }
 // }
 

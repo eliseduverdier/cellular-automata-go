@@ -6,13 +6,10 @@ import (
 	"image/color"
 	"image/png"
 	"os"
-	"path"
-
-	"github.com/eliseduverdier/cellular-automata-go/app/config"
 )
 
 // GenerateImage  saves a PNG from the cellular automata's matrix
-func GenerateImage(matrix [][]int, metadata map[string]int) *image.RGBA {
+func GenerateImage(matrix [][]int, metadata map[string]int, destination string) (*image.RGBA, string) {
 
 	width := len(matrix[0])
 	height := len(matrix)
@@ -42,16 +39,18 @@ func GenerateImage(matrix [][]int, metadata map[string]int) *image.RGBA {
 		}
 	}
 
-	homeDir, _ := os.UserHomeDir()
-	imageDir := path.Join(config.Get().BasePath, "images")
-	f, _ := os.Create(fmt.Sprintf("%s/%s/%s.png", homeDir, imageDir, GetImageName(metadata)))
+	filename := GetImageName(metadata)
+	f, err := os.Create(destination + "/" + filename + ".png")
+	if err != nil {
+		panic(fmt.Sprintf("Could not create image file: %v", err))
+	}
 
-	err := png.Encode(f, img)
+	err = png.Encode(f, img)
 	if err != nil {
 		panic("Could not generate image")
 	}
 
-	return img
+	return img, filename
 }
 
 func GetImageName(metadata map[string]int) string {

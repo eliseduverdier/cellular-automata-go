@@ -1,3 +1,4 @@
 pkg/*
 images/*
 !images/sample.png
+*.excalidraw
