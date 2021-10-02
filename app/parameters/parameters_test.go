@@ -13,10 +13,11 @@ type Test struct {
 
 func TestGetParametersFromRequest(t *testing.T) {
 	tests := []Test{
-		{"/text?start=centered&w=10", Parameters{2, 1, 10, 10, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, 33, "text"}},
+		{"/text?r=1&start=centered", Parameters{2, 1, 100, 100, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 1, "text"}},
 		{"/text?r=110&o=1&s=2&w=4&h=4&start=custom&line=0001", Parameters{2, 1, 4, 4, []int{0, 0, 0, 1}, 110, "text"}},
 		{"/image?r=70&o=1&s=3&w=4&h=4&start=centered", Parameters{3, 1, 4, 4, []int{0, 2, 1, 2}, 70, "image"}},
 		{"/image?r=110&o=2&s=4&w=4&h=4&start=custom&line=1100", Parameters{4, 2, 4, 4, []int{1, 1, 0, 0}, 110, "image"}},
+		{"/image?w=3&r=1", Parameters{2, 1, 3, 3, []int{1, 1, 1}, 1, "image"}},
 	}
 
 	for i := range tests {
@@ -24,6 +25,19 @@ func TestGetParametersFromRequest(t *testing.T) {
 		if actual := GetFromRequest(req); !reflect.DeepEqual(actual, tests[i].Expected) {
 			t.Errorf("parameters.GetFromRequest(%s) error: Got %v, expected %v.", tests[i].Query, actual, tests[i].Expected)
 		}
+	}
+}
+
+func TestGetParametersRandomFromRequest(t *testing.T) {
+	query := "/image?w=3"
+	req, _ := http.NewRequest("GET", query, nil)
+	actualParams := GetFromRequest(req)
+	if len(actualParams.Start) != 3 {
+		t.Errorf("parameters.GetFromRequest(%s) error: Got first line of len %v, expected %v.", query, len(actualParams.Start), 3)
+	}
+	if actualParams.Rule == 0 {
+		t.Errorf("parameters.GetFromRequest(%s) error: Expected a random rule number, got 0.", query)
+
 	}
 }
 

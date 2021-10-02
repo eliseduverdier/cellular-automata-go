@@ -6,15 +6,15 @@ import (
 	"github.com/eliseduverdier/cellular-automata-go/app/parameters"
 )
 
-func TestRenderImage(t *testing.T) {
+func TestRenderImageName(t *testing.T) {
 	params := parameters.Parameters{
-		States:  2,                                   // int
-		Order:   1,                                   // int
-		Columns: 10,                                  // int
-		Rows:    10,                                  // int
-		Start:   []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // []int
-		Rule:    110,                                 // int
-		Render:  "image",                             // string
+		States:  2,
+		Order:   1,
+		Columns: 10,
+		Rows:    10,
+		Start:   []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		Rule:    110,
+		Render:  "image",
 	}
 
 	actual := Render(params)
@@ -24,19 +24,54 @@ func TestRenderImage(t *testing.T) {
 	}
 }
 
-func TestRenderText(t *testing.T) {
+func TestRenderTextImage(t *testing.T) {
 	params := parameters.Parameters{
-		States:  2,                                   // int
-		Order:   1,                                   // int
-		Columns: 10,                                  // int
-		Rows:    10,                                  // int
-		Start:   []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // []int
-		Rule:    110,                                 // int
-		Render:  "text",                              // string
+		States:  2,
+		Order:   1,
+		Columns: 10,
+		Rows:    10,
+		Start:   []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		Rule:    110,
+		Render:  "text",
 	}
 
 	actual := Render(params)
 	expected := ""
+	if actual != expected {
+		t.Errorf("Test render error, expected %s, got %s.", expected, actual)
+	}
+}
+
+// func TestRenderImage(t *testing.T) {
+// params := parameters.Parameters{2, 1, 10, 10, []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 110, "image"}
+
+// actual := RenderImage(params)
+// expected := "s2-o1-r110"
+// if actual != os.get() {
+// 	t.Errorf("Test render error, expected %s, got %s.", expected, actual)
+// }
+// }
+
+func TestRenderText(t *testing.T) {
+	params := parameters.Parameters{2, 1, 10, 9, []int{0, 0, 0, 0, 0, 0, 0, 0, 1, 0}, 110, "text"}
+
+	actual := RenderText(params)
+	expected :=
+		`
+		 ╔═════════════════════════╗
+		 ║ States: 2  Order: 1     ║
+		 ║ Rule:          110      ║
+		 ╚═════════════════════════╝
+████████ █
+███████  █
+██████   █
+█████  █ █
+████     █
+███  ███ █
+██   ██  █
+█  █ █   █
+       █ █
+`
 	if actual != expected {
 		t.Errorf("Test render error, expected %s, got %s.", expected, actual)
 	}

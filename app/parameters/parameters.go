@@ -10,22 +10,24 @@ import (
 	"github.com/eliseduverdier/cellular-automata-go/app/automata"
 )
 
+// Parameters to tweak the automata
 type Parameters struct {
 	States  int
 	Order   int
 	Columns int
 	Rows    int
 	Start   []int
-	Rule    int
+	Rule    int64
 	Render  string
 }
 
+// GetFromRequest Parse query string to get the parameters
 func GetFromRequest(req *http.Request) Parameters {
 	states, _ := strconv.Atoi(req.URL.Query().Get("s"))
 	order, _ := strconv.Atoi(req.URL.Query().Get("o"))
 	width, _ := strconv.Atoi(req.URL.Query().Get("w"))
 	height, _ := strconv.Atoi(req.URL.Query().Get("h"))
-	rule, _ := strconv.Atoi(req.URL.Query().Get("r"))
+	rule, _ := strconv.ParseInt(req.URL.Query().Get("r"), 10, 64)
 	firstLineType := req.URL.Query().Get("start") // will be used later to generate the first line early
 	firstLineContent := req.URL.Query().Get("line")
 	renderType := req.URL.Path[1:]
@@ -44,7 +46,7 @@ func GetFromRequest(req *http.Request) Parameters {
 		height = width
 	}
 	if rule == 0 {
-		rule = rand.Intn(automata.GetMaxRule(automata.GetMaxStates(states, order)))
+		rule = rand.Int63n(automata.GetMaxRule(automata.GetMaxStatesCombinaisons(states, order)))
 	}
 
 	// Generate first line from appropriate parameters
@@ -72,12 +74,13 @@ func GetFromRequest(req *http.Request) Parameters {
 	}
 }
 
+// GetFromShell parse shell input to get parameters
 func GetFromShell() Parameters {
 	states := flag.Int("s", 2, "the number of states")
 	order := flag.Int("o", 1, "the order (1 or 2)")
 	width := flag.Int("w", 100, "the number of columns")
 	height := flag.Int("h", 100, "the number of rows")
-	rule := flag.Int("r", 73, "the rule number")
+	rule := flag.Int64("r", 73, "the rule number")
 
 	firstLineType := flag.String("start", "random", "the type of first line if automatically generated (random, centered)")
 	firstLineContent := flag.String("line", "1", "the content of the first line")

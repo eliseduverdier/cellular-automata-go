@@ -10,7 +10,7 @@ type CellularAutomata struct {
 	Order      int
 	Columns    int
 	Rows       int
-	RuleNumber int
+	RuleNumber int64
 	FirstLine  FirstLine
 }
 
@@ -31,7 +31,7 @@ func (c CellularAutomata) GetMetadata() map[string]int {
 	return map[string]int{
 		"states": c.States,
 		"order":  c.Order,
-		"rule":   c.RuleNumber,
+		"rule":   int(c.RuleNumber), // risk of being truncated...
 	}
 }
 

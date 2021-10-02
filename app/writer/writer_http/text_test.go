@@ -6,10 +6,11 @@ import (
 	"testing"
 )
 
-func TestRenderImagePage(t *testing.T) {
-	req, _ := http.NewRequest("GET", "/image", nil)
+func TestRenderTextPage(t *testing.T) {
+
+	req, _ := http.NewRequest("GET", "/text", nil)
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(RenderImagePage)
+	handler := http.HandlerFunc(RenderTextPage)
 
 	handler.ServeHTTP(rr, req)
 
@@ -18,11 +19,10 @@ func TestRenderImagePage(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			actual, http.StatusOK)
 	}
-
 	// Check the response body is an image
-	expected := "image/png"
+	expected := "text/html; charset=utf-8"
 	if actual := rr.Header().Get("Content-Type"); actual != expected {
-		t.Errorf("handler returned unexpected body: expected %s, got %s",
+		t.Errorf("handler returned unexpected body: expected <%s>, got <%s>",
 			expected, actual)
 	}
 }

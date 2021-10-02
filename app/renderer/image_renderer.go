@@ -6,6 +6,9 @@ import (
 	"image/color"
 	"image/png"
 	"os"
+	"path"
+
+	"github.com/eliseduverdier/cellular-automata-go/app/config"
 )
 
 // GenerateImage  saves a PNG from the cellular automata's matrix
@@ -39,8 +42,10 @@ func GenerateImage(matrix [][]int, metadata map[string]int) *image.RGBA {
 		}
 	}
 
-	// Encode as PNG. TODO Fix relative path error, fail from tests !
-	f, _ := os.Create( /* "/images/" +  */ GetImageName(metadata) + ".png")
+	homeDir, _ := os.UserHomeDir()
+	imageDir := path.Join(config.Get().BasePath, "images")
+	f, _ := os.Create(fmt.Sprintf("%s/%s/%s.png", homeDir, imageDir, GetImageName(metadata)))
+
 	err := png.Encode(f, img)
 	if err != nil {
 		panic("Could not generate image")

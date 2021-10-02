@@ -73,9 +73,11 @@ line | if no start strategy is defined, we expect a sequence of numbers represen
 # Run test recursively in all subfolders
 go test ./...
 # generate code coverage
-go test -v -coverprofile test-coverage.html ./...
+go test -v -coverprofile tests/coverage.out ./...
 # display code coverage as html
-go tool cover -html=coverage.out
+go tool cover -html=tests/coverage.out
+# lint (needs https://golangci-lint.run/)
+golangci-lint run
 ```
 
 # Etc
@@ -89,6 +91,7 @@ go tool cover -html=coverage.out
 - [x] add stragety pattern for the first line (random|centered|custom)
 - [x] add end point to get custom first line
 - [ ] add a way to generate the automata on demand from the custom first line
+- [ ] add more coverage and display badge
 
 ### install latest go version on ubuntu
 
