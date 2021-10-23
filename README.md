@@ -15,11 +15,11 @@ Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementar
 
 - As PNG images (rule 73)
 
-  <img src="images/sample.png">
+  <img src="_doc/images/sample.png">
 
 - Or as text (rule 110)
 
-```
+<pre style="line-height:8px;">
 ██ █ █    ██  ███ █ ███   ██ █ █   ██   █  ██
        █  █  ██         █ █      █ █  █ █ ██
       █ ██ ██  █       █   █    █   ██      █
@@ -35,37 +35,40 @@ Generates [elementary cellular automata](https://en.wikipedia.org/wiki/Elementar
     █     █ █      █ █ █ █     ██     ██   ██
    █ █   █   █    █       █   █  █   █  █ █  █
 █ █   █ █ █ █ █  █ █     █ █ █ ██ █ █ ██   ██ █
-```
+</pre>
 
 ## Use locally
 
 ```shell
-go run main.go
+PORT=8888 go run main.go
 ```
 
 Then go to http://localhost:8888/text or http://localhost:8888/image and use GET parameters (listed below)
 
-Or use in the shell with
+## Exemple of nice automatas
 
-```shell
-go run main.go --shell
-```
+![Order 1  /  2 states  /  Rule # 150](_doc/images/o1-s2-r150.png)
+![Order 1  /  2 states  /  Rule # 73](_doc/images/o1-s2-r73.png)
+![Order 1  /  3 states  /  Rule # 78271914](_doc/images/o1-s3-r78271914.png)
+![Order 1  /  3 states  /  Rule # 76148092](_doc/images/o1-s3-r76148092.png)
 
-This will generate an image in `images/` (or a text directly with the `-render=text` flag)
+![Order 2  /  2 states  /  Rule # 24987](_doc/images/o2-s2-r24987.png)
+![Order 2  /  2 states  /  Rule # 56922](_doc/images/o2-s2-r56922.png)
+![Order 2  /  2 states  /  Rule # 5198](_doc/images/o2-s2-r5198.png)
+![Order 2  /  2 states  /  Rule # 58937](_doc/images/o2-s2-r58937.png)
+![Order 2  /  2 states  /  Rule # 37486](_doc/images/o2-s2-r37486.png)
 
-### command line options & get parameters
+### parameters
 
-Example: `go run main.go -s=5 -o=2 -r=12345 -w=30 -h=10 -render=text` will render the automata #12345 of 2nd order with 5 sates, in text directly to the console, showing 30 columns of characters, and 10 rows.
-option | role
--------|------
-s | number of states ()>2)
-o | order (1 or 2)
-r | rule number
-w | width in pixels
-h | height in pixels
-render | 'image' or 'text' for shell environement only
-start | first line strategy ("random", "centered", or "custom", see below)
-line | if no start strategy is defined, we expect a sequence of numbers representing the first line "0..." by default
+| option | role                                                                   |
+| ------ | ---------------------------------------------------------------------- |
+| s      | number of states (>2)                                                  |
+| o      | order (1 or 2)                                                         |
+| r      | rule number                                                            |
+| w      | width in pixels                                                        |
+| h      | height in pixels                                                       |
+| start  | first line strategy ("random", "centered", "left", "right", see below) |
+| line   | a sequence of numbers representing the first line like "0000010..."    |
 
 ## Run tests
 
@@ -91,7 +94,9 @@ golangci-lint run
 - [x] add stragety pattern for the first line (random|centered|custom)
 - [x] add end point to get custom first line
 - [ ] add a way to generate the automata on demand from the custom first line
-- [ ] add more coverage and display badge
+- [x] add more coverage and display badge
+- [ ] remove shell support (maybe save on separate branch)
+- [ ] Cache when rule isn't random
 
 ### install latest go version on ubuntu
 
