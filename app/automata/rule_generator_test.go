@@ -43,6 +43,6 @@ func TestGetMaxRule(t *testing.T) {
 	actual := GetMaxRule(nb)
 	expected := float64(256)
 	if actual != expected {
-		t.Errorf("TestGetMaxRule(%d) error, got: %d, expected: %d.", nb, actual, expected)
+		t.Errorf("TestGetMaxRule(%v) error, got: %v, expected: %v.", nb, actual, expected)
 	}
 }
