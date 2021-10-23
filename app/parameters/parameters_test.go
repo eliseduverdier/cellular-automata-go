@@ -53,21 +53,3 @@ func TestCatchIncorrectRequest(t *testing.T) {
 	// 	}
 	// }
 }
-
-func TestGetParametersFromShell(t *testing.T) {
-	// tests := []Test{
-	// 	{"-text ", Parameters{2, 1, 10, 10, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, 110, "text"}},
-	// 	{"-text -r=123 -w=4 -start=centered", Parameters{2, 1, 4, 4, []int{0, 0, 0, 1}, 123, "text"}},
-	// 	{"-image -w=4", Parameters{2, 1, 4, 4, []int{0, 0, 0, 1}, 70, "image"}},
-	// 	{"-image -w=4 -s=4 -o=2 -line=1100", Parameters{4, 2, 4, 4, []int{1, 1, 0, 0}, 110, "image"}},
-	// }
-
-	// for i := range tests {
-	// 	input := strings.NewReader("-shell -r=123")
-	// 	reader := io.Reader(input)
-	// 	r := bufio.NewScanner(reader)
-	// 	if actual := GetFromShell(); !reflect.DeepEqual(actual, tests[i].Expected) {
-	// 		t.Errorf("parameters.GetFromShell(%s) error: Got %v, expected %v.", tests[i].Query, actual, tests[i].Expected)
-	// 	}
-	// }
-}
