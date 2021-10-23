@@ -10,7 +10,7 @@ type CellularAutomata struct {
 	Order      int
 	Columns    int
 	Rows       int
-	RuleNumber int64
+	RuleNumber float64
 	FirstLine  FirstLine
 }
 

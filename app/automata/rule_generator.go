@@ -11,11 +11,11 @@ import (
 // For example, for the rule 30 (11110 in base 2), the array map these values :
 // current pattern          : 111 (7)  110 (6)  101 (5)  100 (4)  011 (3)  010 (2)  001 (1)  000 (0)
 // new state for center cell:   0        0        0        1        1        1        1        0
-func RuleToArray(states int, order int, ruleNumber int64) []int {
+func RuleToArray(states int, order int, ruleNumber float64) []int {
 	// o cells with n possible states: n^o + 1
 	maxStates := GetMaxStatesCombinaisons(states, order)
 
-	ruleInBaseN := strconv.FormatInt(int64(ruleNumber), states)
+	ruleInBaseN := strconv.FormatInt(int64(float64(ruleNumber)), states)
 	reversedRule := Reverse(ruleInBaseN)
 
 	ruleArray := make([]int, maxStates)
@@ -49,6 +49,6 @@ func GetMaxStatesCombinaisons(states int, order int) int {
 }
 
 // GetMaxRule the higher rule number possible
-func GetMaxRule(maxStatesCombi int) int64 {
-	return int64(math.Pow(float64(2), float64(maxStatesCombi)))
+func GetMaxRule(maxStatesCombi int) float64 {
+	return float64(math.Pow(float64(2), float64(maxStatesCombi)))
 }

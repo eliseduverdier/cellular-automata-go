@@ -1,7 +1,6 @@
 package parameters
 
 import (
-	"flag"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -17,7 +16,7 @@ type Parameters struct {
 	Columns int
 	Rows    int
 	Start   []int
-	Rule    int64
+	Rule    float64
 	Render  string
 }
 
@@ -28,6 +27,7 @@ func GetFromRequest(req *http.Request) Parameters {
 	width, _ := strconv.Atoi(req.URL.Query().Get("w"))
 	height, _ := strconv.Atoi(req.URL.Query().Get("h"))
 	rule, _ := strconv.ParseInt(req.URL.Query().Get("r"), 10, 64)
+	ruleNb := float64(rule)
 	firstLineType := req.URL.Query().Get("start") // will be used later to generate the first line early
 	firstLineContent := req.URL.Query().Get("line")
 	renderType := req.URL.Path[1:]
@@ -46,7 +46,8 @@ func GetFromRequest(req *http.Request) Parameters {
 		height = width
 	}
 	if rule == 0 {
-		rule = rand.Int63n(automata.GetMaxRule(automata.GetMaxStatesCombinaisons(states, order)))
+		max := float64(automata.GetMaxRule(automata.GetMaxStatesCombinaisons(states, order)))
+		ruleNb = rand.Float64() * max
 	}
 
 	// Generate first line from appropriate parameters
@@ -75,7 +76,7 @@ func GetFromRequest(req *http.Request) Parameters {
 		Order:   order,
 		Columns: width,
 		Rows:    height,
-		Rule:    rule,
+		Rule:    ruleNb,
 		Start:   firstLine,
 		Render:  renderType,
 	}
