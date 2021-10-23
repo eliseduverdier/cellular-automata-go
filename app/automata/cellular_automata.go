@@ -4,7 +4,7 @@ import (
 	"strconv"
 )
 
-// CellularAutomata  The cellular automata structure
+// CellularAutomata The cellular automata structure
 type CellularAutomata struct {
 	States     int
 	Order      int
@@ -14,7 +14,7 @@ type CellularAutomata struct {
 	FirstLine  FirstLine
 }
 
-// GetMatrix  Builds the matrix line after line
+// GetMatrix Builds the matrix line after line
 func (c CellularAutomata) GetMatrix() [][]int {
 	ruleArray := RuleToArray(c.States, c.Order, c.RuleNumber)
 
@@ -26,7 +26,7 @@ func (c CellularAutomata) GetMatrix() [][]int {
 	return matrix
 }
 
-// GetImageName  Returns the properties of the automata (states, order, and rule number)
+// GetImageName Returns the properties of the automata (states, order, and rule number)
 func (c CellularAutomata) GetMetadata() map[string]int {
 	return map[string]int{
 		"states": c.States,

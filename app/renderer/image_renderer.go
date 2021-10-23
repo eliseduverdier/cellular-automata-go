@@ -4,11 +4,9 @@ import (
 	"fmt"
 	"image"
 	"image/color"
-	"image/png"
-	"os"
 )
 
-// GenerateImage  saves a PNG from the cellular automata's matrix
+// GenerateImage saves a PNG from the cellular automata's matrix
 func GenerateImage(matrix [][]int, metadata map[string]int, destination string) (*image.RGBA, string) {
 
 	width := len(matrix[0])
@@ -39,20 +37,24 @@ func GenerateImage(matrix [][]int, metadata map[string]int, destination string) 
 		}
 	}
 
+	// TODO try to bypass this step, returning directly the image
+	// maybe https://pkg.go.dev/github.com/reugn/go-streams
 	filename := GetImageName(metadata)
-	f, err := os.Create(destination + "/" + filename + ".png")
-	if err != nil {
-		panic(fmt.Sprintf("Could not create image file: %v", err))
-	}
+	// f, err := os.Create(destination + "/" + filename + ".png")
+	// if err != nil {
+	// 	panic(fmt.Sprintf("Could not create image file: %v", err))
+	// }
+	// stream := io.Reader
 
-	err = png.Encode(f, img)
-	if err != nil {
-		panic("Could not generate image")
-	}
+	// err = png.Encode(stream, img)
+	// if err != nil {
+	// 	panic("Could not generate image")
+	// }
 
 	return img, filename
 }
 
+// GetImageName from number of states, order, and rule number
 func GetImageName(metadata map[string]int) string {
 	return fmt.Sprintf("s%d-o%d-r%d", metadata["states"], metadata["order"], metadata["rule"])
 }
