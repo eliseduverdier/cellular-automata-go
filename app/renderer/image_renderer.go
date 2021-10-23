@@ -37,21 +37,7 @@ func GenerateImage(matrix [][]int, metadata map[string]int, destination string) 
 		}
 	}
 
-	// TODO try to bypass this step, returning directly the image
-	// maybe https://pkg.go.dev/github.com/reugn/go-streams
-	filename := GetImageName(metadata)
-	// f, err := os.Create(destination + "/" + filename + ".png")
-	// if err != nil {
-	// 	panic(fmt.Sprintf("Could not create image file: %v", err))
-	// }
-	// stream := io.Reader
-
-	// err = png.Encode(stream, img)
-	// if err != nil {
-	// 	panic("Could not generate image")
-	// }
-
-	return img, filename
+	return img, GetImageName(metadata)
 }
 
 // GetImageName from number of states, order, and rule number

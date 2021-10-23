@@ -13,6 +13,7 @@ func RenderHttp() {
 	http.HandleFunc("/text", RenderTextPage)
 	http.HandleFunc("/custom", RenderCustomTextPage)
 	http.HandleFunc("/image", RenderImagePage)
+	http.HandleFunc("/favicon.ico", Favicon)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -21,6 +22,6 @@ func RenderHttp() {
 
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
-		panic("Server doesn't run")
+		panic(err)
 	}
 }
