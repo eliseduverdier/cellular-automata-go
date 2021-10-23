@@ -52,15 +52,22 @@ func GetFromRequest(req *http.Request) Parameters {
 	// Generate first line from appropriate parameters
 
 	firstLine := make([]int, width)
-	if firstLineType == "centered" {
+	switch firstLineType {
+	case "centered":
 		firstLine = automata.GetCenteredLine(width, states)
-	} else if firstLineContent != "" {
-		line := strings.Split(firstLineContent, "")
-		for i, v := range line {
-			firstLine[i], _ = strconv.Atoi(v)
+	case "right":
+		firstLine = automata.GetPixelsOnRight(width, states)
+	case "left":
+		firstLine = automata.GetPixelsOnLeft(width, states)
+	default:
+		if firstLineContent != "" {
+			line := strings.Split(firstLineContent, "")
+			for i, v := range line {
+				firstLine[i], _ = strconv.Atoi(v)
+			}
+		} else {
+			firstLine = automata.GetRandomLine(width, states)
 		}
-	} else {
-		firstLine = automata.GetRandomLine(width, states)
 	}
 
 	return Parameters{
