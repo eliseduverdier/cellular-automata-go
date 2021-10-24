@@ -73,14 +73,12 @@ Then go to http://localhost:8888/text or http://localhost:8888/image and use GET
 ## Run tests
 
 ```shell
-# Run test recursively in all subfolders
-go test ./...
+# run tests
+make test
 # generate code coverage
-go test -v -coverprofile tests/coverage.out ./...
-# display code coverage as html
-go tool cover -html=tests/coverage.out
+make coverage
 # lint (needs https://golangci-lint.run/)
-golangci-lint run
+make lint
 ```
 
 # Etc
@@ -88,14 +86,8 @@ golangci-lint run
 ## Todo
 
 - [ ] add docker
-- [x] code coverage
 - [ ] add option to get dots bigger than 1px
 - [ ] add option to choose custom colors
-- [x] add stragety pattern for the first line (random|centered|custom)
-- [x] add end point to get custom first line
-- [ ] add a way to generate the automata on demand from the custom first line
-- [x] add more coverage and display badge
-- [ ] remove shell support (maybe save on separate branch)
 - [ ] Cache when rule isn't random
 
 ### install latest go version on ubuntu
