@@ -42,19 +42,21 @@ func TestRenderTextImage(t *testing.T) {
 	}
 }
 
-// func TestRenderImage(t *testing.T) {
-// params := parameters.Parameters{2, 1, 10, 10, []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 110, "image"}
+// TODO: compare two images pixel by pixel
+func TestRenderImage(t *testing.T) {
+	params := parameters.Parameters{2, 1, 10, 10, []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 110, "image"}
 
-// actualImage, actualName := RenderImage(params)
-// expectedImage := get the one in tests/testdata/
-// expectedName := "s2-o1-r110"
-// if expectedName != actualName {
-// 	t.Errorf("Test render error, expected name %s, got %s.", expected, actual)
-// }
-// if expectedImage != actualImage {
-// 	t.Errorf("Test render error, expected image %s, got %s.", expected, actual)
-// }
-// }
+	_, actualName := RenderImage(params)
+	//expectedImageFile, _ := os.Open("../tests/testdata/image-s2-o1-r110-100x100.png") // get the one in tests/testdata/
+	//expectedImage, _, _ := image.Decode(expectedImageFile)
+	expectedName := "s2-o1-r110"
+	if expectedName != actualName {
+		t.Errorf("Test render error, expected name %s, got %s.", expectedName, actualName)
+	}
+	// if expectedImage != actualImage {
+	// 	t.Errorf("Test render error, expected image %v, got %v.", expectedImage, actualImage)
+	// }
+}
 
 func TestRenderText(t *testing.T) {
 	params := parameters.Parameters{2, 1, 10, 9, []int{0, 0, 0, 0, 0, 0, 0, 0, 1, 0}, 110, "text"}

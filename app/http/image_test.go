@@ -1,4 +1,4 @@
-package writer_http
+package http
 
 import (
 	"net/http"
@@ -6,11 +6,10 @@ import (
 	"testing"
 )
 
-func TestRenderTextPage(t *testing.T) {
-
-	req, _ := http.NewRequest("GET", "/text", nil)
+func TestRenderImagePage(t *testing.T) {
+	req, _ := http.NewRequest("GET", "/image", nil)
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(RenderTextPage)
+	handler := http.HandlerFunc(RenderImagePage)
 
 	handler.ServeHTTP(rr, req)
 
@@ -19,10 +18,11 @@ func TestRenderTextPage(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			actual, http.StatusOK)
 	}
+
 	// Check the response body is an image
-	expected := "text/html; charset=utf-8"
+	expected := "image/png"
 	if actual := rr.Header().Get("Content-Type"); actual != expected {
-		t.Errorf("handler returned unexpected body: expected <%s>, got <%s>",
+		t.Errorf("handler returned unexpected body: expected %s, got %s",
 			expected, actual)
 	}
 }

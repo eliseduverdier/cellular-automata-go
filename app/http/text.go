@@ -1,4 +1,4 @@
-package writer_http
+package http
 
 import (
 	"fmt"

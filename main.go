@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/eliseduverdier/cellular-automata-go/app/writer/writer_http"
+	"github.com/eliseduverdier/cellular-automata-go/app/http"
 )
 
 func main() {
-	writer_http.RenderHttp()
+	http.RenderHttp()
 }

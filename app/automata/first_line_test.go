@@ -10,12 +10,16 @@ type Test struct {
 	Expected []int
 }
 
-// GetCenteredLineTest
-func GetCenteredLineTest(t *testing.T) {
+// GetLineFromStrategyTest
+func TestGetCenteredLine(t *testing.T) {
 	tests := []Test{
 		{Actual: GetCenteredLine(10, 2), Expected: []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0}},
 		{Actual: GetCenteredLine(9, 2), Expected: []int{0, 0, 0, 0, 1, 0, 0, 0, 0}},
-		{Actual: GetCenteredLine(10, 5), Expected: []int{0, 0, 1, 2, 3, 4, 3, 2, 1, 0}},
+		{Actual: GetCenteredLine(10, 5), Expected: []int{0, 0, 4, 3, 2, 1, 2, 3, 4, 0}},
+		{Actual: GetPixelsOnLeft(10, 2), Expected: []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}},
+		{Actual: GetPixelsOnLeft(10, 6), Expected: []int{1, 2, 3, 4, 5, 0, 0, 0, 0, 0}},
+		{Actual: GetPixelsOnRight(10, 2), Expected: []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1}},
+		{Actual: GetPixelsOnRight(10, 6), Expected: []int{0, 0, 0, 0, 0, 5, 4, 3, 2, 1}},
 	}
 
 	for i := range tests {
@@ -26,7 +30,7 @@ func GetCenteredLineTest(t *testing.T) {
 }
 
 // GetRandomLineTest
-func GetRandomLineTest(t *testing.T) {
+func TestGetRandomLine(t *testing.T) {
 	expectedLen := 10
 	randomLine := GetRandomLine(expectedLen, 2)
 	if len(randomLine) != expectedLen {
