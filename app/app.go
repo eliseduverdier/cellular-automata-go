@@ -23,7 +23,7 @@ func Render(params parameters.Parameters) string {
 
 	switch params.Render {
 	case "image":
-		renderer.GenerateImage(automata.GetMatrix(), automata.GetMetadata(), GetImagePath())
+		renderer.GenerateImage(automata.GetMatrix(), params.PixelSize, automata.GetMetadata(), GetImagePath())
 		return renderer.GetImageName(automata.GetMetadata())
 	case "text":
 		renderer.GenerateText(automata.GetMatrix(), automata.GetMetadata())
@@ -58,7 +58,7 @@ func RenderImage(params parameters.Parameters) (*image.RGBA, string) {
 		FirstLine:  automata.FirstLine{params.Start},
 	}
 
-	return renderer.GenerateImage(automata.GetMatrix(), automata.GetMetadata(), GetImagePath())
+	return renderer.GenerateImage(automata.GetMatrix(), params.PixelSize, automata.GetMetadata(), GetImagePath())
 }
 
 func GetImagePath() string {

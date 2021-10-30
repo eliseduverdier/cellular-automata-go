@@ -13,11 +13,13 @@ type Test struct {
 
 func TestGetParametersFromRequest(t *testing.T) {
 	tests := []Test{
-		{"/text?r=1&start=centered", Parameters{2, 1, 100, 100, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 1, "text"}},
-		{"/text?r=110&o=1&s=2&w=4&h=4&start=custom&line=0001", Parameters{2, 1, 4, 4, []int{0, 0, 0, 1}, 110, "text"}},
-		{"/image?r=70&o=1&s=3&w=4&h=4&start=centered", Parameters{3, 1, 4, 4, []int{0, 2, 1, 2}, 70, "image"}},
-		{"/image?r=110&o=2&s=4&w=4&h=4&start=custom&line=1100", Parameters{4, 2, 4, 4, []int{1, 1, 0, 0}, 110, "image"}},
-		{"/image?w=3&r=1", Parameters{2, 1, 3, 3, []int{1, 1, 1}, 1, "image"}},
+		{"/text?r=1&start=centered", Parameters{2, 1, 100, 100, 1, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 1, "text"}},
+		{"/text?r=110&o=1&s=2&w=4&h=4&start=custom&line=0001", Parameters{2, 1, 4, 4, 1, []int{0, 0, 0, 1}, 110, "text"}},
+		{"/image?r=70&o=1&s=3&w=4&h=4&start=centered", Parameters{3, 1, 4, 4, 1, []int{0, 2, 1, 2}, 70, "image"}},
+		{"/image?r=110&o=2&s=4&w=4&h=4&start=custom&line=1100", Parameters{4, 2, 4, 4, 1, []int{1, 1, 0, 0}, 110, "image"}},
+		{"/image?w=3&r=1", Parameters{2, 1, 3, 3, 1, []int{1, 1, 1}, 1, "image"}},
+		{"/image?w=3&r=1&p=10&line=111", Parameters{2, 1, 3, 3, 10, []int{1, 1, 1}, 1, "image"}},
+		{"/image?w=3&r=1&p=30&line=111", Parameters{2, 1, 3, 3, 1, []int{1, 1, 1}, 1, "image"}},
 	}
 
 	for i := range tests {

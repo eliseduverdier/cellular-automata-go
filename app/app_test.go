@@ -8,13 +8,14 @@ import (
 
 func TestRenderImageName(t *testing.T) {
 	params := parameters.Parameters{
-		States:  2,
-		Order:   1,
-		Columns: 10,
-		Rows:    10,
-		Start:   []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		Rule:    110,
-		Render:  "image",
+		States:    2,
+		Order:     1,
+		Columns:   10,
+		Rows:      10,
+		PixelSize: 1,
+		Start:     []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		Rule:      110,
+		Render:    "image",
 	}
 
 	actual := Render(params)
@@ -26,13 +27,14 @@ func TestRenderImageName(t *testing.T) {
 
 func TestRenderTextImage(t *testing.T) {
 	params := parameters.Parameters{
-		States:  2,
-		Order:   1,
-		Columns: 10,
-		Rows:    10,
-		Start:   []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		Rule:    110,
-		Render:  "text",
+		States:    2,
+		Order:     1,
+		Columns:   10,
+		Rows:      10,
+		PixelSize: 1,
+		Start:     []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		Rule:      110,
+		Render:    "text",
 	}
 
 	actual := Render(params)
@@ -42,24 +44,18 @@ func TestRenderTextImage(t *testing.T) {
 	}
 }
 
-// TODO: compare two images pixel by pixel
 func TestRenderImage(t *testing.T) {
-	params := parameters.Parameters{2, 1, 10, 10, []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 110, "image"}
+	params := parameters.Parameters{2, 1, 10, 10, 1, []int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 110, "image"}
 
 	_, actualName := RenderImage(params)
-	//expectedImageFile, _ := os.Open("../tests/testdata/image-s2-o1-r110-100x100.png") // get the one in tests/testdata/
-	//expectedImage, _, _ := image.Decode(expectedImageFile)
 	expectedName := "s2-o1-r110"
 	if expectedName != actualName {
 		t.Errorf("Test render error, expected name %s, got %s.", expectedName, actualName)
 	}
-	// if expectedImage != actualImage {
-	// 	t.Errorf("Test render error, expected image %v, got %v.", expectedImage, actualImage)
-	// }
 }
 
 func TestRenderText(t *testing.T) {
-	params := parameters.Parameters{2, 1, 10, 9, []int{0, 0, 0, 0, 0, 0, 0, 0, 1, 0}, 110, "text"}
+	params := parameters.Parameters{2, 1, 10, 9, 1, []int{0, 0, 0, 0, 0, 0, 0, 0, 1, 0}, 110, "text"}
 
 	actual := RenderText(params)
 	expected :=

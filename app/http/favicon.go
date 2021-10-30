@@ -17,13 +17,14 @@ func RenderFavicon(w http.ResponseWriter, r *http.Request) {
 	goodChoices := []int{73, 110, 150, 160}
 
 	params := parameters.Parameters{
-		States:  2,
-		Order:   1,
-		Columns: 16,
-		Rows:    16,
-		Start:   []int{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-		Rule:    float64(goodChoices[rand.Intn(len(goodChoices))]),
-		Render:  "image",
+		States:    2,
+		Order:     1,
+		Columns:   16,
+		Rows:      16,
+		PixelSize: 1,
+		Start:     []int{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+		Rule:      float64(goodChoices[rand.Intn(len(goodChoices))]),
+		Render:    "image",
 	}
 	image, _ := app.RenderImage(params)
 

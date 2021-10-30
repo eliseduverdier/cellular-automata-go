@@ -67,6 +67,7 @@ Then go to http://localhost:8888/text or http://localhost:8888/image and use GET
 | r      | rule number                                                            |
 | w      | width in pixels                                                        |
 | h      | height in pixels                                                       |
+| p      | size of one cell in pixels (1 \< p \< 20)                              |
 | start  | first line strategy ("random", "centered", "left", "right", see below) |
 | line   | a sequence of numbers representing the first line like "0000010..."    |
 

@@ -7,13 +7,13 @@ import (
 )
 
 // GenerateImage saves a PNG from the cellular automata's matrix
-func GenerateImage(matrix [][]int, metadata map[string]int, destination string) (*image.RGBA, string) {
+func GenerateImage(matrix [][]int, pixelSize int, metadata map[string]int, destination string) (*image.RGBA, string) {
 
 	width := len(matrix[0])
 	height := len(matrix)
 
 	upLeft := image.Point{0, 0}
-	lowRight := image.Point{width, height}
+	lowRight := image.Point{width * pixelSize, height * pixelSize}
 
 	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
 
@@ -33,7 +33,11 @@ func GenerateImage(matrix [][]int, metadata map[string]int, destination string) 
 
 	for x := 0; x < height; x++ {
 		for y := 0; y < width; y++ {
-			img.Set(y, x, colors[matrix[x][y]])
+			if pixelSize > 1 {
+				drawRect(*img, y*pixelSize, x*pixelSize, pixelSize, colors[matrix[x][y]])
+			} else {
+				img.Set(y, x, colors[matrix[x][y]])
+			}
 		}
 	}
 
@@ -43,4 +47,13 @@ func GenerateImage(matrix [][]int, metadata map[string]int, destination string) 
 // GetImageName from number of states, order, and rule number
 func GetImageName(metadata map[string]int) string {
 	return fmt.Sprintf("s%d-o%d-r%d", metadata["states"], metadata["order"], metadata["rule"])
+}
+
+func drawRect(image image.RGBA, x, y, pixelSize int, color color.RGBA) {
+	for i := x; i < x+pixelSize; i++ {
+		for j := y; j < y+pixelSize; j++ {
+
+			image.Set(i, j, color)
+		}
+	}
 }

@@ -11,13 +11,14 @@ import (
 
 // Parameters to tweak the automata
 type Parameters struct {
-	States  int
-	Order   int
-	Columns int
-	Rows    int
-	Start   []int
-	Rule    float64
-	Render  string
+	States    int
+	Order     int
+	Columns   int
+	Rows      int
+	PixelSize int
+	Start     []int
+	Rule      float64
+	Render    string
 }
 
 // GetFromRequest Parse query string to get the parameters
@@ -26,6 +27,7 @@ func GetFromRequest(req *http.Request) Parameters {
 	order, _ := strconv.Atoi(req.URL.Query().Get("o"))
 	width, _ := strconv.Atoi(req.URL.Query().Get("w"))
 	height, _ := strconv.Atoi(req.URL.Query().Get("h"))
+	pixelSize, _ := strconv.Atoi(req.URL.Query().Get("p"))
 	rule, _ := strconv.ParseInt(req.URL.Query().Get("r"), 10, 64)
 	ruleNb := float64(rule)
 	firstLineType := req.URL.Query().Get("start") // will be used later to generate the first line early
@@ -44,6 +46,9 @@ func GetFromRequest(req *http.Request) Parameters {
 	}
 	if height == 0 {
 		height = width
+	}
+	if pixelSize < 1 || pixelSize > 20 {
+		pixelSize = 1
 	}
 	if rule == 0 {
 		max := float64(automata.GetMaxRule(automata.GetMaxStatesCombinaisons(states, order)))
@@ -72,12 +77,13 @@ func GetFromRequest(req *http.Request) Parameters {
 	}
 
 	return Parameters{
-		States:  states,
-		Order:   order,
-		Columns: width,
-		Rows:    height,
-		Rule:    ruleNb,
-		Start:   firstLine,
-		Render:  renderType,
+		States:    states,
+		Order:     order,
+		Columns:   width,
+		Rows:      height,
+		PixelSize: pixelSize,
+		Rule:      ruleNb,
+		Start:     firstLine,
+		Render:    renderType,
 	}
 }
